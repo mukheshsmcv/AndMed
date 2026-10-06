@@ -106,6 +106,7 @@ export async function GET(req: Request) {
           id: t.id,
           name: t.name,
           slug: t.slug,
+          manualStatus: evidence.manualStatus,
           status: deriveCurriculumStatus(evidence),
           completionPercentage: calculateCompletionPercentage(evidence.masteryScore, evidence.questionsAttempted, evidence.manualStatus),
           masteryScore: evidence.masteryScore,
@@ -122,7 +123,7 @@ export async function GET(req: Request) {
 
       const totalQCount = topicDetails.reduce((sum, t) => sum + t.questionCount, 0);
       const coveredTopics = topicDetails.filter(t => t.questionCount > 0).length;
-      const completedTopics = topicDetails.filter(t => t.status === 'COMPLETED' || t.status === 'MASTERED').length;
+      const completedTopics = topicDetails.filter(t => t.manualStatus === 'COMPLETED').length;
 
       const sEvidence = {
         questionsAttempted: sMastery?.questions_attempted || 0,

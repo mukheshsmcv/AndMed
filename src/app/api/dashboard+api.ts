@@ -10,6 +10,11 @@ import {
 
 export async function GET(req: Request) {
   try {
+    const url = new URL(req.url);
+    const clientDateStr = url.searchParams.get('clientDate'); // Format: YYYY-MM-DD
+    const tzOffsetParam = url.searchParams.get('tzOffset');
+    const tzOffsetMinutes = tzOffsetParam ? parseInt(tzOffsetParam, 10) : 0;
+    
     const authHeader = req.headers.get('Authorization');
     if (!authHeader) return Response.json({ error: 'Missing auth header' }, { status: 401 });
 
@@ -20,7 +25,10 @@ export async function GET(req: Request) {
       return Response.json({ error: 'Unauthorized' }, { status: 401 });
     }
 
-    // 1. Fetch Mastery Records
+    // 1. Fetch User and Metadata
+    const dailyTargetHours = user?.user_metadata?.daily_study_target_hours || 6;
+
+    // 2. Fetch Mastery Records
     const { data: masteryRecords, error: masteryError } = await supabaseServer
       .from('topic_mastery')
       .select(`
@@ -86,7 +94,49 @@ export async function GET(req: Request) {
       });
     }
 
-    // 4. Fetch Study Sessions for Streak, Today Study Seconds, and Recent Subjects
+    // 4. Fetch ACTIVE Study Session (Phase 2 & 6)
+    const { data: activeSessionRow } = await supabaseServer
+      .from('student_topic_sessions')
+      .select(`
+        id,
+        started_at,
+        topic_id,
+        topics (
+          id,
+          name,
+          subject_id,
+          subjects (
+            id,
+            name,
+            slug
+          )
+        )
+      `)
+      .eq('user_id', user.id)
+      .eq('status', 'ACTIVE')
+      .order('started_at', { ascending: false })
+      .limit(1)
+      .maybeSingle();
+
+    let activeStudySession: any = null;
+    if (activeSessionRow) {
+      const topic: any = activeSessionRow.topics;
+      const subj = Array.isArray(topic?.subjects) ? topic.subjects[0] : topic?.subjects;
+      const startedAtTime = new Date(activeSessionRow.started_at).getTime();
+      const elapsedSeconds = Math.max(0, Math.floor((Date.now() - startedAtTime) / 1000));
+      
+      activeStudySession = {
+        sessionId: activeSessionRow.id,
+        topicId: activeSessionRow.topic_id,
+        topicName: topic?.name || 'Current Topic',
+        subjectId: subj?.id || topic?.subject_id,
+        subjectName: subj?.name || 'Current Subject',
+        startedAt: activeSessionRow.started_at,
+        elapsedSeconds
+      };
+    }
+
+    // 5. Fetch Completed Study Sessions for Streak, Today Study Seconds, and Recent Subjects
     const { data: sessions } = await supabaseServer
       .from('student_topic_sessions')
       .select(`
@@ -114,21 +164,40 @@ export async function GET(req: Request) {
     // Calculate Streak & Today's Study Time
     let todayStudySeconds = 0;
     let currentStreak = 0;
-    let mostRecentTopicId = sessions && sessions.length > 0 ? sessions[0].topic_id : null;
     let recentTopicDetails: any = null;
     
     const seenSubjectIds = new Set<string>();
+    // Exclude active subject from historical recent subjects to prevent duplicate listing
+    if (activeStudySession?.subjectId) {
+      seenSubjectIds.add(activeStudySession.subjectId);
+    }
+
     const recentSubjects: any[] = [];
 
     if (sessions && sessions.length > 0) {
-      const studyDays = new Set<string>();
-      const today = new Date();
-      const todayStr = `${today.getFullYear()}-${String(today.getMonth()+1).padStart(2,'0')}-${String(today.getDate()).padStart(2,'0')}`;
+      const studyDays = new Map<string, number>(); // dayStr -> totalSeconds
+      const serverToday = new Date();
+      // If clientDateStr is missing, fallback to server's date
+      const todayStr = clientDateStr || `${serverToday.getFullYear()}-${String(serverToday.getMonth()+1).padStart(2,'0')}-${String(serverToday.getDate()).padStart(2,'0')}`;
+
+      // Helper to convert UTC date to client's local YYYY-MM-DD string
+      const getClientLocalString = (utcDate: Date) => {
+        if (!tzOffsetParam) {
+          // Fallback: use server's local interpretation
+          return `${utcDate.getFullYear()}-${String(utcDate.getMonth()+1).padStart(2,'0')}-${String(utcDate.getDate()).padStart(2,'0')}`;
+        }
+        // tzOffset is in minutes, e.g. IST is -330 (which means local is UTC + 330 minutes)
+        // JS Date getTime() is absolute ms since UTC epoch. 
+        // We subtract tzOffsetMinutes * 60000 to get a mock UTC date that represents the client's local time
+        const localTimeMock = new Date(utcDate.getTime() - (tzOffsetMinutes * 60000));
+        return `${localTimeMock.getUTCFullYear()}-${String(localTimeMock.getUTCMonth()+1).padStart(2,'0')}-${String(localTimeMock.getUTCDate()).padStart(2,'0')}`;
+      };
 
       sessions.forEach(s => {
         const d = new Date(s.started_at);
-        const dayStr = `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
-        studyDays.add(dayStr);
+        const dayStr = getClientLocalString(d);
+        const currentTotal = studyDays.get(dayStr) || 0;
+        studyDays.set(dayStr, currentTotal + (s.duration_seconds || 0));
         
         if (dayStr === todayStr) {
           todayStudySeconds += (s.duration_seconds || 0);
@@ -142,7 +211,7 @@ export async function GET(req: Request) {
           
           const sessionDate = new Date(s.started_at);
           const sMid = new Date(sessionDate.getFullYear(), sessionDate.getMonth(), sessionDate.getDate());
-          const nowMid = new Date(today.getFullYear(), today.getMonth(), today.getDate());
+          const nowMid = new Date(serverToday.getFullYear(), serverToday.getMonth(), serverToday.getDate());
           const diffDays = Math.round((nowMid.getTime() - sMid.getTime()) / (1000 * 60 * 60 * 24));
           
           let relativeTime = '';
@@ -162,28 +231,65 @@ export async function GET(req: Request) {
         }
       });
 
+      // Daily Goals & Streak Logic
+      const defaultTargetSeconds = dailyTargetHours * 3600;
+      
+      // Attempt to upsert today's goal snapshot (graceful fallback if table missing)
+      try {
+        await supabaseServer.from('student_daily_goals').upsert({
+          user_id: user.id,
+          local_date: todayStr,
+          target_seconds: defaultTargetSeconds,
+          updated_at: new Date().toISOString()
+        }, { onConflict: 'user_id, local_date' });
+      } catch (e) {
+        // Table might not exist yet; ignore
+      }
+
+      // Fetch historical goals
+      const dailyGoalsMap = new Map<string, number>();
+      try {
+        const { data: goals } = await supabaseServer
+          .from('student_daily_goals')
+          .select('local_date, target_seconds')
+          .eq('user_id', user.id);
+        if (goals) {
+          goals.forEach(g => dailyGoalsMap.set(g.local_date, g.target_seconds));
+        }
+      } catch (e) {
+        // Fallback handled below
+      }
+
       // Calculate streak walking backwards from today
-      let checkDate = new Date(today);
+      let checkDate = new Date(clientDateStr ? new Date(clientDateStr) : serverToday);
       let streakActive = true;
       let dayCounter = 0;
 
       while (streakActive) {
         const checkStr = `${checkDate.getFullYear()}-${String(checkDate.getMonth()+1).padStart(2,'0')}-${String(checkDate.getDate()).padStart(2,'0')}`;
-        if (studyDays.has(checkStr)) {
+        const actualSeconds = studyDays.get(checkStr) || 0;
+        const targetSeconds = dailyGoalsMap.get(checkStr) || defaultTargetSeconds;
+        
+        const isSuccessfulDay = actualSeconds >= targetSeconds;
+
+        if (isSuccessfulDay) {
           currentStreak++;
           checkDate.setDate(checkDate.getDate() - 1);
           dayCounter++;
         } else {
           if (dayCounter === 0) {
+            // It's today, and we haven't reached the goal yet. 
+            // We don't break the streak immediately; we just skip today and check yesterday.
             checkDate.setDate(checkDate.getDate() - 1);
             dayCounter++;
           } else {
+            // Streak broken
             streakActive = false;
           }
         }
       }
 
-      // Populate recent topic details
+      // Populate recent topic details from completed sessions if not active
       const firstSessionTopic: any = sessions[0].topics;
       if (firstSessionTopic) {
         const subj: any = Array.isArray(firstSessionTopic.subjects) ? firstSessionTopic.subjects[0] : firstSessionTopic.subjects;
@@ -195,7 +301,18 @@ export async function GET(req: Request) {
       }
     }
 
-    // 5. Fetch Subjects, Topics, and Student Topic Progress for Curriculum Progress
+    // If there is an active session, it overrides recentTopicDetails for Today's Focus
+    if (activeStudySession) {
+      recentTopicDetails = {
+        id: activeStudySession.topicId,
+        name: activeStudySession.topicName,
+        subjectName: activeStudySession.subjectName,
+        isActive: true,
+        startedAt: activeStudySession.startedAt
+      };
+    }
+
+    // 6. Fetch Subjects, Topics, and Student Topic Progress for Curriculum Progress
     const { data: allSubjects } = await supabaseServer
       .from('subjects')
       .select('id, name, slug, display_order')
@@ -242,7 +359,7 @@ export async function GET(req: Request) {
       };
     });
 
-    // 6. Fetch Topic Spaced Revisions (M17)
+    // 7. Fetch Topic Spaced Revisions (M17)
     const todayStr = new Date().toISOString().split('T')[0];
     const { data: topicRevisions } = await supabaseServer
       .from('student_topic_revisions')
@@ -281,7 +398,6 @@ export async function GET(req: Request) {
         };
       }).filter((r: any) => r.status === 'OVERDUE' || r.status === 'DUE_TODAY');
       
-      // Sort by overdue first, then by scheduled date
       activeRevisions.sort((a: any, b: any) => {
         if (a.status === 'OVERDUE' && b.status !== 'OVERDUE') return -1;
         if (b.status === 'OVERDUE' && a.status !== 'OVERDUE') return 1;
@@ -289,7 +405,7 @@ export async function GET(req: Request) {
       });
     }
 
-    // 7. Dashboard Engine Metrics
+    // 8. Dashboard Engine Metrics
     const isNewUser = mappedMastery.length === 0 && (!recentAttempts || recentAttempts.length === 0);
     const readiness = calculateReadinessScore(mappedMastery);
     const subjects = calculateSubjectMastery(mappedMastery);
@@ -306,6 +422,7 @@ export async function GET(req: Request) {
       revisionStats,
       performanceStats,
       nextAction,
+      activeStudySession,
       activeRevisions,
       recentSubjects: recentSubjects.slice(0, 5),
       subjectProgress,

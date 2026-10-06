@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, TouchableOpacity, TextInput, Alert, ActivityIndicator } from 'react-native';
+import { View, Text, TouchableOpacity, TextInput, Alert, ActivityIndicator, ScrollView } from 'react-native';
 import { supabase } from '../lib/supabase';
 import { router } from 'expo-router';
 import { Screen, PrimaryButton, SPACING, RADIUS } from '../components/DesignSystem';
@@ -160,17 +160,19 @@ export default function Onboarding() {
             <Text style={{ color: theme.primaryText, fontSize: 32, fontWeight: '800', letterSpacing: -0.5, marginBottom: SPACING.lg }}>
               How many hours can you target studying each day?
             </Text>
-            <View style={{ flexDirection: 'row', flexWrap: 'wrap', gap: SPACING.md }}>
-              {[2, 4, 6, 8, 10, 12].map(hours => (
-                <View key={hours} style={{ width: '47%' }}>
-                  <OptionButton 
-                    label={hours === 12 ? '12+ hours' : `${hours} hours`} 
-                    selected={studyTarget === hours} 
-                    onPress={() => setStudyTarget(hours)} 
-                  />
-                </View>
-              ))}
-            </View>
+            <ScrollView style={{ maxHeight: 300 }} showsVerticalScrollIndicator={true}>
+              <View style={{ flexDirection: 'row', flexWrap: 'wrap', gap: SPACING.md, paddingBottom: SPACING.xl }}>
+                {Array.from({length: 20}, (_, i) => i + 1).map(hours => (
+                  <View key={hours} style={{ width: '47%' }}>
+                    <OptionButton 
+                      label={`${hours} ${hours === 1 ? 'hour' : 'hours'}`} 
+                      selected={studyTarget === hours} 
+                      onPress={() => setStudyTarget(hours)} 
+                    />
+                  </View>
+                ))}
+              </View>
+            </ScrollView>
           </View>
         )}
       </View>

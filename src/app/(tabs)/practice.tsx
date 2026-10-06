@@ -6,7 +6,7 @@ import { Ionicons } from '@expo/vector-icons';
 
 export default function Practice() {
   return (
-    <Screen noPadding>
+    <Screen noPadding tabIndex={2}>
       <View style={{ paddingHorizontal: SPACING.md, paddingTop: SPACING.xl, paddingBottom: SPACING.md, borderBottomWidth: 1, borderBottomColor: COLORS.border, backgroundColor: COLORS.surface }}>
         <Text style={{ fontSize: 34, fontWeight: '800', color: COLORS.primaryText, letterSpacing: -0.5 }}>Practice</Text>
       </View>

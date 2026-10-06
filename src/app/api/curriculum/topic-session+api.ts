@@ -23,78 +23,102 @@ export async function POST(req: Request) {
     }
 
     if (action === 'start') {
-      // 1. Update topic progress status to IN_PROGRESS
-      await supabaseServer.from('student_topic_progress').upsert({
-        user_id: user.id,
-        topic_id: topicId,
-        status: 'IN_PROGRESS',
-        updated_at: new Date().toISOString()
-      }, { onConflict: 'user_id, topic_id' });
+      // 1. Check if user already has an ACTIVE session
+      const { data: existingActive } = await supabaseServer
+        .from('student_topic_sessions')
+        .select('*')
+        .eq('user_id', user.id)
+        .eq('status', 'ACTIVE')
+        .order('started_at', { ascending: false })
+        .limit(1)
+        .maybeSingle();
 
-      // 2. Create new active session
-      const { data, error: insertError } = await supabaseServer.from('student_topic_sessions').insert({
-        user_id: user.id,
-        topic_id: topicId,
-        status: 'ACTIVE',
-        started_at: new Date().toISOString()
-      }).select().single();
+      if (existingActive) {
+        // If the active session is for the same topic, resume it
+        if (existingActive.topic_id === topicId) {
+          return Response.json({ success: true, session: existingActive, resumed: true });
+        }
+        // If active session was for a different topic, complete/close previous one first
+        const now = Date.now();
+        const prevStart = new Date(existingActive.started_at).getTime();
+        const prevDuration = Math.max(1, Math.floor((now - prevStart) / 1000));
 
-      // If the table doesn't exist yet, we still return success to keep the client working based on progress status
-      if (insertError) {
-        console.warn('Session insert failed (table may not exist):', insertError.message);
-        return Response.json({ success: true, warning: 'session_table_missing' });
+        await supabaseServer
+          .from('student_topic_sessions')
+          .update({
+            status: 'COMPLETED',
+            ended_at: new Date().toISOString(),
+            duration_seconds: prevDuration,
+            updated_at: new Date().toISOString()
+          })
+          .eq('id', existingActive.id);
       }
 
-      return Response.json({ success: true, session: data });
+      // 2. Mark progress as IN_PROGRESS if currently NOT_STARTED
+      const { data: currentProg } = await supabaseServer
+        .from('student_topic_progress')
+        .select('status')
+        .eq('user_id', user.id)
+        .eq('topic_id', topicId)
+        .maybeSingle();
+
+      if (!currentProg || currentProg.status !== 'COMPLETED') {
+        await supabaseServer.from('student_topic_progress').upsert({
+          user_id: user.id,
+          topic_id: topicId,
+          status: 'IN_PROGRESS',
+          updated_at: new Date().toISOString()
+        }, { onConflict: 'user_id, topic_id' });
+      }
+
+      // 3. Create single ACTIVE session
+      const { data: newSession, error: insertError } = await supabaseServer
+        .from('student_topic_sessions')
+        .insert({
+          user_id: user.id,
+          topic_id: topicId,
+          status: 'ACTIVE',
+          started_at: new Date().toISOString()
+        })
+        .select()
+        .single();
+
+      if (insertError) {
+        console.error('Session insert error:', insertError);
+        return Response.json({ error: insertError.message }, { status: 500 });
+      }
+
+      return Response.json({ success: true, session: newSession });
     } 
     
     if (action === 'complete' || action === 'abandon') {
       const finalStatus = action === 'complete' ? 'COMPLETED' : 'ABANDONED';
       
-      // Update session if it exists
+      // Update any active session for this topic
       const { data: activeSessions } = await supabaseServer
         .from('student_topic_sessions')
         .select('*')
         .eq('user_id', user.id)
         .eq('topic_id', topicId)
         .eq('status', 'ACTIVE')
-        .order('started_at', { ascending: false })
-        .limit(1);
+        .order('started_at', { ascending: false });
 
       if (activeSessions && activeSessions.length > 0) {
-        const session = activeSessions[0];
-        const startedAt = new Date(session.started_at).getTime();
-        const now = Date.now();
-        const calcDuration = Math.floor((now - startedAt) / 1000);
-        const finalDuration = durationSeconds || calcDuration;
+        for (const session of activeSessions) {
+          const startedAt = new Date(session.started_at).getTime();
+          const now = Date.now();
+          const calcDuration = Math.max(1, Math.floor((now - startedAt) / 1000));
+          const finalDuration = durationSeconds || calcDuration;
 
-        await supabaseServer.from('student_topic_sessions')
-          .update({
-            status: finalStatus,
-            ended_at: new Date().toISOString(),
-            duration_seconds: finalDuration,
-            updated_at: new Date().toISOString()
-          })
-          .eq('id', session.id);
-      }
-
-      // Update global topic progress if completed
-      if (action === 'complete') {
-        await supabaseServer.from('student_topic_progress').upsert({
-          user_id: user.id,
-          topic_id: topicId,
-          status: 'COMPLETED',
-          manually_completed: true,
-          manually_completed_at: new Date().toISOString(),
-          updated_at: new Date().toISOString()
-        }, { onConflict: 'user_id, topic_id' });
-      } else if (action === 'abandon') {
-        // Just revert to NOT_STARTED if it was abandoned and not previously completed
-        // (Simplified for this milestone)
-        await supabaseServer.from('student_topic_progress').update({
-          status: 'NOT_STARTED',
-          updated_at: new Date().toISOString()
-        }).eq('user_id', user.id).eq('topic_id', topicId).eq('status', 'IN_PROGRESS');
+          await supabaseServer.from('student_topic_sessions')
+            .update({
+              status: finalStatus,
+              ended_at: new Date().toISOString(),
+              duration_seconds: finalDuration,
+              updated_at: new Date().toISOString()
+            })
+            .eq('id', session.id);
+        }
       }
 
       return Response.json({ success: true });

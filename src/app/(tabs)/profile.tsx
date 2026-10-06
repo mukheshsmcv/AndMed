@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import { View, Text, ScrollView, TouchableOpacity, Alert } from 'react-native';
+import React, { useEffect, useState, useRef } from 'react';
+import { View, Text, ScrollView, TouchableOpacity, Alert, Modal, FlatList, Dimensions } from 'react-native';
 import { supabase } from '../../lib/supabase';
 import { router } from 'expo-router';
 import { Screen, GlassCard, SPACING, RADIUS } from '../../components/DesignSystem';
@@ -13,6 +13,8 @@ export default function Profile() {
   const [email, setEmail] = useState<string>('');
   const [examTargetId, setExamTargetId] = useState(CURRENT_EXAM_ID);
   const [metadata, setMetadata] = useState<any>({});
+  const [isTargetPickerVisible, setTargetPickerVisible] = useState(false);
+  const flatListRef = useRef<FlatList>(null);
 
   useEffect(() => {
     supabase.auth.getSession().then(({ data }) => {
@@ -67,29 +69,32 @@ export default function Profile() {
   };
 
   const handleStudyTargetChange = () => {
-    const options = [2, 4, 6, 8, 10, 12];
-    const buttons = options.map(hours => ({
-      text: hours === 12 ? '12+ hours' : `${hours} hours`,
-      onPress: async () => {
-        const { error } = await supabase.auth.updateUser({
-          data: { daily_study_target_hours: hours }
-        });
-        if (!error) {
-          setMetadata({ ...metadata, daily_study_target_hours: hours });
-        }
+    setTargetPickerVisible(true);
+    // Give modal time to render then scroll to selected
+    setTimeout(() => {
+      const target = metadata?.daily_study_target_hours || 6;
+      if (flatListRef.current && target >= 1 && target <= 20) {
+        flatListRef.current.scrollToIndex({ index: target - 1, animated: true, viewPosition: 0.5 });
       }
-    }));
-    
-    Alert.alert("Daily Study Target", "Select your intended study target:", [
-      ...buttons,
-      { text: "Cancel", style: "cancel" }
-    ]);
+    }, 200);
+  };
+
+  const handleSelectTarget = async (hours: number) => {
+    setTargetPickerVisible(false);
+    const { error } = await supabase.auth.updateUser({
+      data: { daily_study_target_hours: hours }
+    });
+    if (!error) {
+      setMetadata({ ...metadata, daily_study_target_hours: hours });
+    } else {
+      Alert.alert('Error', 'Failed to update daily target.');
+    }
   };
 
   const currentExam = EXAM_TARGETS[examTargetId];
 
   return (
-    <Screen noPadding>
+    <Screen noPadding tabIndex={4}>
       <View style={{ paddingHorizontal: SPACING.md, paddingTop: SPACING.xl, paddingBottom: SPACING.md, borderBottomWidth: 1, borderBottomColor: theme.border, backgroundColor: theme.surface }}>
         <Text style={{ fontSize: 34, fontWeight: '800', color: theme.primaryText, letterSpacing: -0.5 }}>Profile</Text>
       </View>
@@ -121,7 +126,7 @@ export default function Profile() {
             <View style={{ flex: 1 }}>
               <Text style={{ color: theme.secondaryText, fontSize: 13, fontWeight: '600', textTransform: 'uppercase', marginBottom: 2 }}>Daily Study Target</Text>
               <Text style={{ color: theme.primaryText, fontSize: 18, fontWeight: '700' }}>
-                {metadata?.daily_study_target_hours ? (metadata.daily_study_target_hours === 12 ? '12+ hours' : `${metadata.daily_study_target_hours} hours`) : 'Not set'}
+                {metadata?.daily_study_target_hours ? `${metadata.daily_study_target_hours} hours` : 'Not set'}
               </Text>
             </View>
             <View style={{ flexDirection: 'row', alignItems: 'center' }}>
@@ -206,6 +211,58 @@ export default function Profile() {
         </Text>
 
       </ScrollView>
+
+      {/* Target Hour Picker Modal */}
+      <Modal visible={isTargetPickerVisible} transparent animationType="slide">
+        <View style={{ flex: 1, justifyContent: 'flex-end', backgroundColor: 'rgba(0,0,0,0.5)' }}>
+          <View style={{ backgroundColor: theme.surface, borderTopLeftRadius: RADIUS.lg, borderTopRightRadius: RADIUS.lg, padding: SPACING.lg, maxHeight: Dimensions.get('window').height * 0.6 }}>
+            <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginBottom: SPACING.lg }}>
+              <Text style={{ fontSize: 22, fontWeight: '800', color: theme.primaryText }}>Daily Study Target</Text>
+              <TouchableOpacity onPress={() => setTargetPickerVisible(false)}>
+                <Ionicons name="close-circle" size={28} color={theme.tertiaryText} />
+              </TouchableOpacity>
+            </View>
+            <FlatList 
+              ref={flatListRef}
+              data={Array.from({length: 20}, (_, i) => i + 1)}
+              keyExtractor={item => item.toString()}
+              showsVerticalScrollIndicator={false}
+              onScrollToIndexFailed={(info) => {
+                setTimeout(() => {
+                  if (flatListRef.current) {
+                    flatListRef.current.scrollToIndex({ index: info.index, animated: true, viewPosition: 0.5 });
+                  }
+                }, 100);
+              }}
+              renderItem={({item}) => {
+                const isSelected = item === (metadata?.daily_study_target_hours || 6);
+                return (
+                  <TouchableOpacity 
+                    onPress={() => handleSelectTarget(item)}
+                    style={{
+                      paddingVertical: SPACING.md,
+                      paddingHorizontal: SPACING.lg,
+                      alignItems: 'center',
+                      backgroundColor: isSelected ? theme.surfaceHighlight : 'transparent',
+                      borderRadius: RADIUS.md,
+                      marginBottom: SPACING.xs
+                    }}
+                    accessibilityRole="button"
+                    accessibilityLabel={`Daily study target: ${item} hours`}
+                  >
+                    <Text style={{ 
+                      fontSize: isSelected ? 22 : 18, 
+                      fontWeight: isSelected ? '800' : '500', 
+                      color: isSelected ? theme.accent : theme.primaryText 
+                    }}>{item} {item === 1 ? 'hour' : 'hours'}</Text>
+                  </TouchableOpacity>
+                );
+              }}
+            />
+          </View>
+        </View>
+      </Modal>
+
     </Screen>
   );
 }

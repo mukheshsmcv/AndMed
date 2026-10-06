@@ -169,20 +169,20 @@ export default function Curriculum() {
 
   // Calculate overall stats
   let totalTopics = 0;
-  let studiedTopics = 0; 
+  let completedTopicsCount = 0;
   let allTopicsFlattened: any[] = [];
   
   curriculumData.forEach(sub => {
     totalTopics += sub.topicCount || (sub.topics ? sub.topics.length : 0);
     if (sub.topics) {
       sub.topics.forEach((t: any) => {
-        if (t.status === 'COMPLETED' || t.masteryScore > 0 || t.questionCount > 0) studiedTopics++;
+        if (t.status === 'COMPLETED' || t.status === 'MASTERED') completedTopicsCount++;
         allTopicsFlattened.push({ ...t, subjectName: sub.name });
       });
     }
   });
 
-  const overallProgress = totalTopics > 0 ? Math.round((studiedTopics / totalTopics) * 100) : 0;
+  const overallProgress = totalTopics > 0 ? Math.round((completedTopicsCount / totalTopics) * 100) : 0;
 
   // Filter for Search
   const searchLower = searchQuery.toLowerCase().trim();
@@ -248,7 +248,7 @@ export default function Curriculum() {
   };
 
   return (
-    <Screen noPadding>
+    <Screen noPadding tabIndex={1}>
       <View style={{ paddingHorizontal: SPACING.md, paddingTop: SPACING.xl, paddingBottom: SPACING.sm, backgroundColor: theme.surface }}>
         <Text style={{ fontSize: 34, fontWeight: '800', color: theme.primaryText, letterSpacing: -0.5, marginBottom: SPACING.md }}>Curriculum</Text>
         <View style={{ 
@@ -282,7 +282,7 @@ export default function Curriculum() {
           <>
             <View style={{ marginBottom: SPACING.lg }}>
               <Text style={{ color: theme.secondaryText, fontSize: 13, fontWeight: '600', textTransform: 'uppercase', marginBottom: SPACING.xs }}>Your MBBS Curriculum</Text>
-              <Text style={{ color: theme.primaryText, fontSize: 24, fontWeight: '800', letterSpacing: -0.5 }}>{studiedTopics} / {totalTopics} topics studied</Text>
+              <Text style={{ color: theme.primaryText, fontSize: 24, fontWeight: '800', letterSpacing: -0.5 }}>{completedTopicsCount} / {totalTopics} topics completed</Text>
               <View style={{ flexDirection: 'row', alignItems: 'center', marginTop: SPACING.xs, marginBottom: SPACING.md }}>
                 <Text style={{ color: theme.accent, fontSize: 16, fontWeight: '700', marginRight: SPACING.sm }}>{overallProgress}%</Text>
                 <ProgressBar progress={overallProgress} height={6} />

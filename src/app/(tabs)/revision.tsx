@@ -62,7 +62,7 @@ export default function Revision() {
   const totalDueNow = overdueList.length + dueTodayList.length;
 
   return (
-    <Screen noPadding>
+    <Screen noPadding tabIndex={3}>
       {/* Title Header */}
       <View style={{ paddingHorizontal: SPACING.md, paddingTop: SPACING.xl, paddingBottom: SPACING.md, borderBottomWidth: 1, borderBottomColor: theme.border, backgroundColor: theme.surface }}>
         <Text style={{ fontSize: 34, fontWeight: '800', color: theme.primaryText, letterSpacing: -0.5 }}>Revision</Text>

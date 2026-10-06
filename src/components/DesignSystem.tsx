@@ -1,5 +1,6 @@
 import React, { useEffect, useRef } from 'react';
-import { View, Text, TouchableOpacity, Animated, Easing } from 'react-native';
+import { View, Text, TouchableOpacity, Animated, Easing, PanResponder } from 'react-native';
+import { router } from 'expo-router';
 import { useTheme, THEMES } from '../theme/ThemeProvider';
 
 export const SPACING = {
@@ -19,16 +20,88 @@ export const RADIUS = {
   full: 9999,
 };
 
-// Reusable Components
+export const TAB_ROUTES = [
+  '/(tabs)',
+  '/(tabs)/curriculum',
+  '/(tabs)/practice',
+  '/(tabs)/revision',
+  '/(tabs)/profile'
+] as const;
 
-export const Screen = ({ children, style, noPadding = false }: any) => {
+// High-performance live timer component
+export const ActiveTimer = ({ startedAt, style }: { startedAt: string; style?: any }) => {
   const { theme } = useTheme();
+  const [elapsed, setElapsed] = React.useState(0);
+
+  React.useEffect(() => {
+    const start = new Date(startedAt).getTime();
+    const update = () => {
+      const now = Date.now();
+      setElapsed(Math.max(0, Math.floor((now - start) / 1000)));
+    };
+    update();
+    const interval = setInterval(update, 1000);
+    return () => clearInterval(interval);
+  }, [startedAt]);
+
+  const h = Math.floor(elapsed / 3600);
+  const m = Math.floor((elapsed % 3600) / 60);
+  const s = elapsed % 60;
+  
+  const pad = (n: number) => n.toString().padStart(2, '0');
+  
   return (
-    <View style={[{ flex: 1, backgroundColor: theme.background, paddingHorizontal: noPadding ? 0 : SPACING.md, paddingTop: noPadding ? 0 : SPACING.xl }, style]}>
+    <Text style={[{ color: theme.accent, fontSize: 13, fontWeight: '700', fontFamily: 'monospace' }, style]}>
+      {h > 0 ? `${pad(h)}:` : ''}{pad(m)}:{pad(s)}
+    </Text>
+  );
+};
+
+// Screen component with optional tab swipe navigation
+export const Screen = ({ children, style, noPadding = false, tabIndex }: any) => {
+  const { theme } = useTheme();
+  const tabIndexRef = useRef(tabIndex);
+  tabIndexRef.current = tabIndex;
+
+  const panResponder = useRef(
+    PanResponder.create({
+      onStartShouldSetPanResponder: () => false,
+      onMoveShouldSetPanResponder: (_, gestureState) => {
+        // Require clearly horizontal swipe: dx larger than dy by factor of 2, minimum 20px movement
+        const absX = Math.abs(gestureState.dx);
+        const absY = Math.abs(gestureState.dy);
+        return absX > 20 && absX > absY * 2.5;
+      },
+      onPanResponderTerminationRequest: () => false,
+      onPanResponderRelease: (_, gestureState) => {
+        const idx = tabIndexRef.current;
+        if (idx === undefined) return;
+        // Swipe left -> Next Tab (threshold: 40px)
+        if (gestureState.dx < -40 && gestureState.vx < -0.1 && idx < TAB_ROUTES.length - 1) {
+          const nextRoute = TAB_ROUTES[idx + 1];
+          router.navigate(nextRoute as any);
+        }
+        // Swipe right -> Previous Tab
+        else if (gestureState.dx > 40 && gestureState.vx > 0.1 && idx > 0) {
+          const prevRoute = TAB_ROUTES[idx - 1];
+          router.navigate(prevRoute as any);
+        }
+      }
+    })
+  ).current;
+
+  const handlers = tabIndex !== undefined ? panResponder.panHandlers : {};
+
+  return (
+    <View 
+      {...handlers}
+      style={[{ flex: 1, backgroundColor: theme.background, paddingHorizontal: noPadding ? 0 : SPACING.md, paddingTop: noPadding ? 0 : SPACING.xl }, style]}
+    >
       {children}
     </View>
   );
 };
+
 
 export const SectionHeader = ({ title, actionTitle, onAction, subtitle }: any) => {
   const { theme } = useTheme();
@@ -205,22 +278,29 @@ export const ProgressRing = ({ progress, size = 120, strokeWidth = 10, color, ch
 
 export const ExamCountdown = ({ target, countdown }: any) => {
   const { theme } = useTheme();
+  
+  let dateDisplay = 'EXAM DATE TBA';
+  if (target.exactDate) {
+    const [y, m, d] = target.exactDate.split('-');
+    const dt = new Date(parseInt(y), parseInt(m) - 1, parseInt(d));
+    dateDisplay = dt.toLocaleDateString('en-GB', { day: '2-digit', month: 'long', year: 'numeric' }).toUpperCase();
+  }
+
   return (
     <View style={{ marginBottom: SPACING.xl, paddingHorizontal: SPACING.xs }}>
-      <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'flex-start' }}>
-        <View>
-          <Text style={{ color: theme.primaryText, fontSize: 32, fontWeight: '800', letterSpacing: -0.5 }}>{target.displayName}</Text>
-          <Text style={{ color: theme.accent, fontSize: 16, fontWeight: '600', marginTop: 2 }}>{target.targetMonth.toUpperCase()}</Text>
-        </View>
-        <View style={{ alignItems: 'flex-end' }}>
-          <Text style={{ color: countdown.type === 'exact' ? theme.primaryText : theme.secondaryText, fontSize: countdown.type === 'exact' ? 32 : 16, fontWeight: '800', letterSpacing: -0.5 }}>
-            {countdown.label}
-          </Text>
-          <Text style={{ color: theme.tertiaryText, fontSize: 13, marginTop: 2, fontWeight: '500' }}>
-            {target.exactDate ? new Date(target.exactDate).toLocaleDateString(undefined, { month: 'long', day: 'numeric', year: 'numeric' }) : 'Exam date TBA'}
-          </Text>
-        </View>
-      </View>
+      <Text style={{ color: theme.accent, fontSize: 16, fontWeight: '700', letterSpacing: 1, marginBottom: 2 }}>
+        {target.displayName.toUpperCase()}
+      </Text>
+      <Text 
+        style={{ color: countdown.type === 'exact' ? theme.primaryText : theme.secondaryText, fontSize: 36, fontWeight: '800', letterSpacing: -1, marginBottom: 2 }}
+        numberOfLines={1}
+        adjustsFontSizeToFit
+      >
+        {countdown.label}
+      </Text>
+      <Text style={{ color: theme.tertiaryText, fontSize: 14, fontWeight: '600', letterSpacing: 0.5 }}>
+        {dateDisplay}
+      </Text>
     </View>
   );
 };

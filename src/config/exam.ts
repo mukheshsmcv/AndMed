@@ -31,7 +31,7 @@ export const CURRENT_EXAM_ID = 'INI-CET_NOV_26';
 export function getExamCountdown(target: ExamTarget, referenceDate?: Date) {
   const now = referenceDate || new Date();
   
-  if (target.isOfficialDate && target.exactDate) {
+  if (target.exactDate) {
     const [y, m, d] = target.exactDate.split('-');
     const targetDate = new Date(parseInt(y), parseInt(m) - 1, parseInt(d));
     
@@ -43,18 +43,15 @@ export function getExamCountdown(target: ExamTarget, referenceDate?: Date) {
     const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
     
     if (diffDays < 0) {
-      return { type: 'past', days: diffDays, label: 'Exam Completed' };
+      return { type: 'past', days: 0, label: 'COMPLETED' };
     }
     
     if (diffDays === 0) {
-      return { type: 'exact', days: 0, label: 'Exam Today' };
+      return { type: 'exact', days: 0, label: 'EXAM_DAY' };
     }
     
-    if (diffDays === 1) {
-      return { type: 'exact', days: 1, label: '1 day remaining' };
-    }
-    
-    return { type: 'exact', days: diffDays, label: `${diffDays} days remaining` };
+    const daysToGo = diffDays - 1;
+    return { type: 'exact', days: daysToGo, label: `${daysToGo} ${daysToGo === 1 ? 'DAY' : 'DAYS'} TO GO` };
   } else {
     return { type: 'approximate', days: null, label: 'Exam date not finalized' };
   }

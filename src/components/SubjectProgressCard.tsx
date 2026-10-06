@@ -100,34 +100,6 @@ export const SubjectProgressCard: React.FC<SubjectProgressCardProps> = ({
           color={theme.learning || '#3B82F6'}
         />
       </View>
-
-      {/* Metric B: MCQ Accuracy */}
-      <View style={{ marginTop: 2 }}>
-        <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginBottom: 4 }}>
-          <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-            <Ionicons name="stats-chart-outline" size={13} color={theme.accent} style={{ marginRight: 4 }} />
-            <Text style={{ color: theme.secondaryText, fontSize: 12, fontWeight: '600' }}>MCQ Accuracy</Text>
-          </View>
-          {hasMcqData && mcqAccuracy !== null ? (
-            <Text style={{ color: theme.primaryText, fontSize: 12, fontWeight: '700' }}>
-              {mcqAccuracy}% <Text style={{ color: theme.tertiaryText, fontWeight: '500' }}>({mcqAttempted} tried)</Text>
-            </Text>
-          ) : (
-            <Text style={{ color: theme.tertiaryText, fontSize: 11, fontWeight: '500', fontStyle: 'italic' }}>
-              — No MCQs attempted
-            </Text>
-          )}
-        </View>
-        {hasMcqData && mcqAccuracy !== null ? (
-          <ProgressBar
-            progress={mcqAccuracy}
-            height={5}
-            color={mcqAccuracy >= 70 ? theme.success : mcqAccuracy >= 50 ? theme.warning : theme.critical}
-          />
-        ) : (
-          <View style={{ height: 5, backgroundColor: theme.surfaceHighlight, borderRadius: RADIUS.full, opacity: 0.5 }} />
-        )}
-      </View>
     </View>
   );
 
