@@ -1,0 +1,702 @@
+[
+    {
+      "importId": "ANAT-GEN-001",
+      "stem": "The deep fascia of the neck is important because it forms the boundaries of several spaces. Which of the following is formed by the pretracheal fascia?",
+      "subjectSlug": "anatomy",
+      "topicSlug": "general-anatomy",
+      "examRelevance": 8,
+      "provenance": "OTHER_AUTHORIZED",
+      "exam": "NEET_PG_INI_CET",
+      "options": [
+        {
+          "text": "Carotid sheath",
+          "isCorrect": false
+        },
+        {
+          "text": "Axillary sheath",
+          "isCorrect": false
+        },
+        {
+          "text": "Retropharyngeal space",
+          "isCorrect": false
+        },
+        {
+          "text": "Pretracheal space",
+          "isCorrect": true
+        }
+      ],
+      "explanation": "The pretracheal fascia surrounds the trachea and thyroid gland and extends into the superior mediastinum. The carotid sheath receives contributions from investing, pretracheal, and prevertebral fascia."
+    },
+    {
+      "importId": "ANAT-GEN-002",
+      "stem": "Which lymph node group is the principal site of drainage of the lateral part of the breast?",
+      "subjectSlug": "anatomy",
+      "topicSlug": "general-anatomy",
+      "examRelevance": 9,
+      "provenance": "OTHER_AUTHORIZED",
+      "exam": "NEET_PG_INI_CET",
+      "options": [
+        {
+          "text": "Parasternal nodes",
+          "isCorrect": false
+        },
+        {
+          "text": "Axillary nodes",
+          "isCorrect": true
+        },
+        {
+          "text": "Supraclavicular nodes",
+          "isCorrect": false
+        },
+        {
+          "text": "Posterior mediastinal nodes",
+          "isCorrect": false
+        }
+      ],
+      "explanation": "Approximately 75% of breast lymph drains to axillary nodes, particularly the anterior (pectoral) group."
+    },
+    {
+      "importId": "ANAT-GEN-003",
+      "stem": "The dermatome corresponding approximately to the nipple is:",
+      "subjectSlug": "anatomy",
+      "topicSlug": "general-anatomy",
+      "examRelevance": 9,
+      "provenance": "OTHER_AUTHORIZED",
+      "exam": "NEET_PG_INI_CET",
+      "options": [
+        {
+          "text": "T2",
+          "isCorrect": false
+        },
+        {
+          "text": "T4",
+          "isCorrect": true
+        },
+        {
+          "text": "T6",
+          "isCorrect": false
+        },
+        {
+          "text": "T8",
+          "isCorrect": false
+        }
+      ],
+      "explanation": "The nipple is classically T4. High-yield: T4 nipple, T6 xiphisternum, T10 umbilicus, L1 inguinal region."
+    },
+    {
+      "importId": "ANAT-GEN-004",
+      "stem": "Which of the following is classified as a sesamoid bone?",
+      "subjectSlug": "anatomy",
+      "topicSlug": "general-anatomy",
+      "examRelevance": 7,
+      "provenance": "OTHER_AUTHORIZED",
+      "exam": "NEET_PG_INI_CET",
+      "options": [
+        {
+          "text": "Scapula",
+          "isCorrect": false
+        },
+        {
+          "text": "Patella",
+          "isCorrect": true
+        },
+        {
+          "text": "Sternum",
+          "isCorrect": false
+        },
+        {
+          "text": "Vertebra",
+          "isCorrect": false
+        }
+      ],
+      "explanation": "The patella is the largest sesamoid bone. Sesamoid bones develop within tendons and alter mechanical advantage."
+    },
+    {
+      "importId": "ANAT-GEN-005",
+      "stem": "Which part of a long bone is primarily responsible for longitudinal growth?",
+      "subjectSlug": "anatomy",
+      "topicSlug": "general-anatomy",
+      "examRelevance": 9,
+      "provenance": "OTHER_AUTHORIZED",
+      "exam": "NEET_PG_INI_CET",
+      "options": [
+        {
+          "text": "Diaphysis",
+          "isCorrect": false
+        },
+        {
+          "text": "Metaphysis",
+          "isCorrect": false
+        },
+        {
+          "text": "Epiphyseal plate",
+          "isCorrect": true
+        },
+        {
+          "text": "Periosteum",
+          "isCorrect": false
+        }
+      ],
+      "explanation": "Longitudinal growth occurs at the epiphyseal growth plate. Its zones progress from resting to proliferative, hypertrophic, calcification, and ossification."
+    },
+    {
+      "importId": "ANAT-GEN-006",
+      "stem": "Which of the following bones develops predominantly by intramembranous ossification?",
+      "subjectSlug": "anatomy",
+      "topicSlug": "general-anatomy",
+      "examRelevance": 8,
+      "provenance": "OTHER_AUTHORIZED",
+      "exam": "NEET_PG_INI_CET",
+      "options": [
+        {
+          "text": "Femur",
+          "isCorrect": false
+        },
+        {
+          "text": "Humerus",
+          "isCorrect": false
+        },
+        {
+          "text": "Mandible",
+          "isCorrect": true
+        },
+        {
+          "text": "Tibia",
+          "isCorrect": false
+        }
+      ],
+      "explanation": "Intramembranous ossification occurs directly from mesenchyme. Major examples include skull flat bones, part of mandible, and clavicle."
+    },
+    {
+      "importId": "ANAT-GEN-007",
+      "stem": "Which of the following is a secondary cartilaginous joint?",
+      "subjectSlug": "anatomy",
+      "topicSlug": "general-anatomy",
+      "examRelevance": 8,
+      "provenance": "OTHER_AUTHORIZED",
+      "exam": "NEET_PG_INI_CET",
+      "options": [
+        {
+          "text": "Shoulder joint",
+          "isCorrect": false
+        },
+        {
+          "text": "Pubic symphysis",
+          "isCorrect": true
+        },
+        {
+          "text": "Atlanto-occipital joint",
+          "isCorrect": false
+        },
+        {
+          "text": "First carpometacarpal joint",
+          "isCorrect": false
+        }
+      ],
+      "explanation": "Secondary cartilaginous joints are symphyses containing fibrocartilage. Examples include pubic symphysis, intervertebral discs, and manubriosternal joint."
+    },
+    {
+      "importId": "ANAT-GEN-008",
+      "stem": "Which of the following is a saddle-type synovial joint?",
+      "subjectSlug": "anatomy",
+      "topicSlug": "general-anatomy",
+      "examRelevance": 8,
+      "provenance": "OTHER_AUTHORIZED",
+      "exam": "NEET_PG_INI_CET",
+      "options": [
+        {
+          "text": "Shoulder joint",
+          "isCorrect": false
+        },
+        {
+          "text": "Hip joint",
+          "isCorrect": false
+        },
+        {
+          "text": "First carpometacarpal joint",
+          "isCorrect": true
+        },
+        {
+          "text": "Interphalangeal joint",
+          "isCorrect": false
+        }
+      ],
+      "explanation": "The first carpometacarpal joint is a classic saddle joint and permits flexion, extension, abduction, adduction, and opposition."
+    },
+    {
+      "importId": "ANAT-GEN-009",
+      "stem": "Which type of muscle fiber is most resistant to fatigue?",
+      "subjectSlug": "anatomy",
+      "topicSlug": "general-anatomy",
+      "examRelevance": 7,
+      "provenance": "OTHER_AUTHORIZED",
+      "exam": "NEET_PG_INI_CET",
+      "options": [
+        {
+          "text": "Type I",
+          "isCorrect": true
+        },
+        {
+          "text": "Type IIa",
+          "isCorrect": false
+        },
+        {
+          "text": "Type IIx",
+          "isCorrect": false
+        },
+        {
+          "text": "Type IIb",
+          "isCorrect": false
+        }
+      ],
+      "explanation": "Type I fibers are slow-twitch oxidative fibers with high mitochondrial density, myoglobin, capillary supply, and oxidative capacity."
+    },
+    {
+      "importId": "ANAT-GEN-010",
+      "stem": "Which muscle arrangement provides the greatest force generation for a given muscle volume?",
+      "subjectSlug": "anatomy",
+      "topicSlug": "general-anatomy",
+      "examRelevance": 8,
+      "provenance": "OTHER_AUTHORIZED",
+      "exam": "NEET_PG_INI_CET",
+      "options": [
+        {
+          "text": "Parallel",
+          "isCorrect": false
+        },
+        {
+          "text": "Fusiform",
+          "isCorrect": false
+        },
+        {
+          "text": "Pennate",
+          "isCorrect": true
+        },
+        {
+          "text": "Circular",
+          "isCorrect": false
+        }
+      ],
+      "explanation": "Pennate muscles pack more fibers into a given volume, increasing physiological cross-sectional area and force generation."
+    },
+    {
+      "importId": "ANAT-GEN-011",
+      "stem": "Which structure connects muscle to bone?",
+      "subjectSlug": "anatomy",
+      "topicSlug": "general-anatomy",
+      "examRelevance": 7,
+      "provenance": "OTHER_AUTHORIZED",
+      "exam": "NEET_PG_INI_CET",
+      "options": [
+        {
+          "text": "Ligament",
+          "isCorrect": false
+        },
+        {
+          "text": "Tendon",
+          "isCorrect": true
+        },
+        {
+          "text": "Fascia",
+          "isCorrect": false
+        },
+        {
+          "text": "Aponeurosis only",
+          "isCorrect": false
+        }
+      ],
+      "explanation": "A tendon connects muscle to bone; a ligament connects bone to bone. An aponeurosis is a broad sheet of dense connective tissue."
+    },
+    {
+      "importId": "ANAT-GEN-012",
+      "stem": "Which nerve fiber has the highest conduction velocity?",
+      "subjectSlug": "anatomy",
+      "topicSlug": "general-anatomy",
+      "examRelevance": 9,
+      "provenance": "OTHER_AUTHORIZED",
+      "exam": "NEET_PG_INI_CET",
+      "options": [
+        {
+          "text": "A-alpha",
+          "isCorrect": true
+        },
+        {
+          "text": "A-delta",
+          "isCorrect": false
+        },
+        {
+          "text": "B",
+          "isCorrect": false
+        },
+        {
+          "text": "C",
+          "isCorrect": false
+        }
+      ],
+      "explanation": "A-alpha fibers are the largest and most heavily myelinated and therefore conduct fastest. Approximate order: A-alpha > A-beta > A-gamma > A-delta > B > C."
+    },
+    {
+      "importId": "ANAT-GEN-013",
+      "stem": "Which type of nerve injury has complete disruption of the nerve trunk?",
+      "subjectSlug": "anatomy",
+      "topicSlug": "general-anatomy",
+      "examRelevance": 9,
+      "provenance": "OTHER_AUTHORIZED",
+      "exam": "NEET_PG_INI_CET",
+      "options": [
+        {
+          "text": "Neuropraxia",
+          "isCorrect": false
+        },
+        {
+          "text": "Axonotmesis",
+          "isCorrect": false
+        },
+        {
+          "text": "Neurotmesis",
+          "isCorrect": true
+        },
+        {
+          "text": "Neurapraxia with preserved axon",
+          "isCorrect": false
+        }
+      ],
+      "explanation": "Neurotmesis is complete nerve disruption. Neuropraxia is a conduction block; axonotmesis disrupts the axon while preserving the connective-tissue framework."
+    },
+    {
+      "importId": "ANAT-GEN-014",
+      "stem": "Following complete transection of a peripheral nerve, degeneration of the distal axon is called:",
+      "subjectSlug": "anatomy",
+      "topicSlug": "general-anatomy",
+      "examRelevance": 9,
+      "provenance": "OTHER_AUTHORIZED",
+      "exam": "NEET_PG_INI_CET",
+      "options": [
+        {
+          "text": "Retrograde degeneration",
+          "isCorrect": false
+        },
+        {
+          "text": "Wallerian degeneration",
+          "isCorrect": true
+        },
+        {
+          "text": "Segmental demyelination",
+          "isCorrect": false
+        },
+        {
+          "text": "Transneuronal degeneration",
+          "isCorrect": false
+        }
+      ],
+      "explanation": "Wallerian degeneration is degeneration of the axon distal to the injury. Schwann cells and macrophages participate in debris removal."
+    },
+    {
+      "importId": "ANAT-GEN-015",
+      "stem": "In a typical long bone, the nutrient artery mainly supplies:",
+      "subjectSlug": "anatomy",
+      "topicSlug": "general-anatomy",
+      "examRelevance": 8,
+      "provenance": "OTHER_AUTHORIZED",
+      "exam": "NEET_PG_INI_CET",
+      "options": [
+        {
+          "text": "Epiphysis only",
+          "isCorrect": false
+        },
+        {
+          "text": "Diaphysis and surrounding marrow",
+          "isCorrect": true
+        },
+        {
+          "text": "Articular cartilage",
+          "isCorrect": false
+        },
+        {
+          "text": "Epiphyseal plate only",
+          "isCorrect": false
+        }
+      ],
+      "explanation": "The nutrient artery enters through the nutrient foramen and supplies the medullary cavity and inner two-thirds of the cortex."
+    },
+    {
+      "importId": "ANAT-GEN-016",
+      "stem": "Which statement regarding periosteum is correct?",
+      "subjectSlug": "anatomy",
+      "topicSlug": "general-anatomy",
+      "examRelevance": 8,
+      "provenance": "OTHER_AUTHORIZED",
+      "exam": "NEET_PG_INI_CET",
+      "options": [
+        {
+          "text": "It covers articular cartilage",
+          "isCorrect": false
+        },
+        {
+          "text": "It is absent over the shaft of long bones",
+          "isCorrect": false
+        },
+        {
+          "text": "It contains osteogenic cells",
+          "isCorrect": true
+        },
+        {
+          "text": "It contains no sensory nerves",
+          "isCorrect": false
+        }
+      ],
+      "explanation": "Periosteum has an outer fibrous layer and an inner osteogenic/cambium layer containing osteoprogenitor cells and osteoblasts. It is vascular and innervated."
+    },
+    {
+      "importId": "ANAT-GEN-017",
+      "stem": "The major functional significance of arterial anastomoses is:",
+      "subjectSlug": "anatomy",
+      "topicSlug": "general-anatomy",
+      "examRelevance": 7,
+      "provenance": "OTHER_AUTHORIZED",
+      "exam": "NEET_PG_INI_CET",
+      "options": [
+        {
+          "text": "Prevention of venous thrombosis",
+          "isCorrect": false
+        },
+        {
+          "text": "Maintenance of blood supply if one arterial route is compromised",
+          "isCorrect": true
+        },
+        {
+          "text": "Prevention of lymphatic obstruction",
+          "isCorrect": false
+        },
+        {
+          "text": "Increasing venous pressure",
+          "isCorrect": false
+        }
+      ],
+      "explanation": "Arterial anastomoses provide alternative routes for blood flow, particularly around joints where movement can compress vessels."
+    },
+    {
+      "importId": "ANAT-GEN-018",
+      "stem": "Which of the following is classically considered a true end artery?",
+      "subjectSlug": "anatomy",
+      "topicSlug": "general-anatomy",
+      "examRelevance": 9,
+      "provenance": "OTHER_AUTHORIZED",
+      "exam": "NEET_PG_INI_CET",
+      "options": [
+        {
+          "text": "Radial artery",
+          "isCorrect": false
+        },
+        {
+          "text": "Central artery of retina",
+          "isCorrect": true
+        },
+        {
+          "text": "Facial artery",
+          "isCorrect": false
+        },
+        {
+          "text": "Superficial temporal artery",
+          "isCorrect": false
+        }
+      ],
+      "explanation": "The central artery of the retina is a classic true end artery. Occlusion causes retinal ischemia and may produce sudden severe visual loss."
+    },
+    {
+      "importId": "ANAT-GEN-019",
+      "stem": "Which vessel type has the greatest capacity for storing blood?",
+      "subjectSlug": "anatomy",
+      "topicSlug": "general-anatomy",
+      "examRelevance": 8,
+      "provenance": "OTHER_AUTHORIZED",
+      "exam": "NEET_PG_INI_CET",
+      "options": [
+        {
+          "text": "Arteries",
+          "isCorrect": false
+        },
+        {
+          "text": "Arterioles",
+          "isCorrect": false
+        },
+        {
+          "text": "Capillaries",
+          "isCorrect": false
+        },
+        {
+          "text": "Veins",
+          "isCorrect": true
+        }
+      ],
+      "explanation": "Veins are capacitance vessels and contain a large proportion of circulating blood volume. Arterioles are major resistance vessels."
+    },
+    {
+      "importId": "ANAT-GEN-020",
+      "stem": "Which type of capillary is characterized by discontinuous endothelium and a discontinuous basement membrane?",
+      "subjectSlug": "anatomy",
+      "topicSlug": "general-anatomy",
+      "examRelevance": 8,
+      "provenance": "OTHER_AUTHORIZED",
+      "exam": "NEET_PG_INI_CET",
+      "options": [
+        {
+          "text": "Continuous capillary",
+          "isCorrect": false
+        },
+        {
+          "text": "Fenestrated capillary",
+          "isCorrect": false
+        },
+        {
+          "text": "Sinusoidal capillary",
+          "isCorrect": true
+        },
+        {
+          "text": "Lymphatic capillary",
+          "isCorrect": false
+        }
+      ],
+      "explanation": "Sinusoidal capillaries have large gaps and a discontinuous basement membrane. Examples include liver, spleen, and bone marrow."
+    },
+    {
+      "importId": "ANAT-GEN-021",
+      "stem": "Which organ does NOT have conventional lymphatic vessels within its parenchyma?",
+      "subjectSlug": "anatomy",
+      "topicSlug": "general-anatomy",
+      "examRelevance": 9,
+      "provenance": "OTHER_AUTHORIZED",
+      "exam": "NEET_PG_INI_CET",
+      "options": [
+        {
+          "text": "Liver",
+          "isCorrect": false
+        },
+        {
+          "text": "Kidney",
+          "isCorrect": false
+        },
+        {
+          "text": "Central nervous system",
+          "isCorrect": true
+        },
+        {
+          "text": "Small intestine",
+          "isCorrect": false
+        }
+      ],
+      "explanation": "For examination purposes, brain parenchyma lacks conventional lymphatic vessels, although lymphatic vessels are present in the dura mater."
+    },
+    {
+      "importId": "ANAT-GEN-022",
+      "stem": "Which epithelium is best suited for rapid diffusion?",
+      "subjectSlug": "anatomy",
+      "topicSlug": "general-anatomy",
+      "examRelevance": 8,
+      "provenance": "OTHER_AUTHORIZED",
+      "exam": "NEET_PG_INI_CET",
+      "options": [
+        {
+          "text": "Simple squamous",
+          "isCorrect": true
+        },
+        {
+          "text": "Simple cuboidal",
+          "isCorrect": false
+        },
+        {
+          "text": "Simple columnar",
+          "isCorrect": false
+        },
+        {
+          "text": "Stratified squamous",
+          "isCorrect": false
+        }
+      ],
+      "explanation": "Simple squamous epithelium provides a minimal barrier for diffusion. Examples include alveoli, endothelium, and mesothelium."
+    },
+    {
+      "importId": "ANAT-GEN-023",
+      "stem": "Which epithelial specialization is primarily responsible for increasing the absorptive surface area?",
+      "subjectSlug": "anatomy",
+      "topicSlug": "general-anatomy",
+      "examRelevance": 9,
+      "provenance": "OTHER_AUTHORIZED",
+      "exam": "NEET_PG_INI_CET",
+      "options": [
+        {
+          "text": "Cilia",
+          "isCorrect": false
+        },
+        {
+          "text": "Microvilli",
+          "isCorrect": true
+        },
+        {
+          "text": "Desmosomes",
+          "isCorrect": false
+        },
+        {
+          "text": "Tight junctions",
+          "isCorrect": false
+        }
+      ],
+      "explanation": "Microvilli increase apical surface area for absorption and contain an actin-based core. Cilia mainly move material across epithelial surfaces."
+    },
+    {
+      "importId": "ANAT-GEN-024",
+      "stem": "Which connective tissue cell is primarily responsible for synthesis of collagen and extracellular matrix?",
+      "subjectSlug": "anatomy",
+      "topicSlug": "general-anatomy",
+      "examRelevance": 8,
+      "provenance": "OTHER_AUTHORIZED",
+      "exam": "NEET_PG_INI_CET",
+      "options": [
+        {
+          "text": "Macrophage",
+          "isCorrect": false
+        },
+        {
+          "text": "Mast cell",
+          "isCorrect": false
+        },
+        {
+          "text": "Fibroblast",
+          "isCorrect": true
+        },
+        {
+          "text": "Plasma cell",
+          "isCorrect": false
+        }
+      ],
+      "explanation": "Fibroblasts synthesize collagen, elastin, proteoglycans, and other extracellular matrix components."
+    },
+    {
+      "importId": "ANAT-GEN-025",
+      "stem": "Which type of collagen is the predominant collagen in hyaline cartilage?",
+      "subjectSlug": "anatomy",
+      "topicSlug": "general-anatomy",
+      "examRelevance": 9,
+      "provenance": "OTHER_AUTHORIZED",
+      "exam": "NEET_PG_INI_CET",
+      "options": [
+        {
+          "text": "Type I",
+          "isCorrect": false
+        },
+        {
+          "text": "Type II",
+          "isCorrect": true
+        },
+        {
+          "text": "Type III",
+          "isCorrect": false
+        },
+        {
+          "text": "Type IV",
+          "isCorrect": false
+        }
+      ],
+      "explanation": "Type II collagen is the major collagen of cartilage. Type I is prominent in bone, skin, tendon and ligament; Type III in reticulin; Type IV in basement membrane."
+  }
+]

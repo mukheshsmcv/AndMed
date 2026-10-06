@@ -1,0 +1,2102 @@
+[
+  {
+    "importId": "ANDE-M16-ANAT-001",
+    "stem": "Which of the following joint types best describes the sagittal suture of the adult human skull?",
+    "subjectSlug": "anatomy",
+    "topicSlug": "anatomy-general-anatomy",
+    "examRelevance": 8,
+    "difficulty": "easy",
+    "questionType": "SINGLE_BEST_ANSWER",
+    "provenance": "ORIGINAL",
+    "exam": "NEET_PG_INI_CET",
+    "options": [
+      {
+        "text": "Primary cartilaginous joint",
+        "isCorrect": false
+      },
+      {
+        "text": "Synovial joint",
+        "isCorrect": false
+      },
+      {
+        "text": "Fibrous joint",
+        "isCorrect": true
+      },
+      {
+        "text": "Secondary cartilaginous joint",
+        "isCorrect": false
+      }
+    ],
+    "explanation": "The sagittal suture is a fibrous joint. Sutures are connected by dense connective tissue and are generally immovable (synarthroses)."
+  },
+  {
+    "importId": "ANDE-M16-ANAT-002",
+    "stem": "Which of the following structures is an example of a traction epiphysis?",
+    "subjectSlug": "anatomy",
+    "topicSlug": "anatomy-general-anatomy",
+    "examRelevance": 8,
+    "difficulty": "medium",
+    "questionType": "SINGLE_BEST_ANSWER",
+    "provenance": "ORIGINAL",
+    "exam": "NEET_PG_INI_CET",
+    "options": [
+      {
+        "text": "Condyles of the tibia",
+        "isCorrect": false
+      },
+      {
+        "text": "Head of the femur",
+        "isCorrect": false
+      },
+      {
+        "text": "Greater trochanter",
+        "isCorrect": true
+      },
+      {
+        "text": "Lower end of the radius",
+        "isCorrect": false
+      }
+    ],
+    "explanation": "Traction epiphyses are formed where muscles attach to bones. The greater trochanter is a traction epiphysis for the gluteal muscles. The head of the femur is a pressure epiphysis."
+  },
+  {
+    "importId": "ANDE-M16-ANAT-003",
+    "stem": "Which type of cartilage forms the articular surfaces of most synovial joints in the human body?",
+    "subjectSlug": "anatomy",
+    "topicSlug": "anatomy-general-anatomy",
+    "examRelevance": 8,
+    "difficulty": "medium",
+    "questionType": "SINGLE_BEST_ANSWER",
+    "provenance": "ORIGINAL",
+    "exam": "NEET_PG_INI_CET",
+    "options": [
+      {
+        "text": "Fibrocartilage",
+        "isCorrect": false
+      },
+      {
+        "text": "Hyaline cartilage",
+        "isCorrect": true
+      },
+      {
+        "text": "Elastic cartilage",
+        "isCorrect": false
+      },
+      {
+        "text": "Reticular cartilage",
+        "isCorrect": false
+      }
+    ],
+    "explanation": "Hyaline cartilage is the most abundant cartilage and forms the articular surfaces of most synovial joints. Fibrocartilage is found in intervertebral discs and the pubic symphysis."
+  },
+  {
+    "importId": "ANDE-M16-ANAT-004",
+    "stem": "In human muscle architecture, which of the following is a classic example of a multipennate muscle designed to generate high force over a short range of movement?",
+    "subjectSlug": "anatomy",
+    "topicSlug": "anatomy-general-anatomy",
+    "examRelevance": 8,
+    "difficulty": "hard",
+    "questionType": "SINGLE_BEST_ANSWER",
+    "provenance": "ORIGINAL",
+    "exam": "NEET_PG_INI_CET",
+    "options": [
+      {
+        "text": "Deltoid",
+        "isCorrect": true
+      },
+      {
+        "text": "Sartorius",
+        "isCorrect": false
+      },
+      {
+        "text": "Rectus abdominis",
+        "isCorrect": false
+      },
+      {
+        "text": "Biceps brachii",
+        "isCorrect": false
+      }
+    ],
+    "explanation": "The deltoid is a multipennate muscle, allowing a large number of fibers to be packed in a small area, generating high force. Sartorius is parallel, biceps is fusiform."
+  },
+  {
+    "importId": "ANDE-M16-ANAT-005",
+    "stem": "Which of the following vascular arrangements best describes the functional end arteries found within the central nervous system?",
+    "subjectSlug": "anatomy",
+    "topicSlug": "anatomy-general-anatomy",
+    "examRelevance": 8,
+    "difficulty": "hard",
+    "questionType": "SINGLE_BEST_ANSWER",
+    "provenance": "ORIGINAL",
+    "exam": "NEET_PG_INI_CET",
+    "options": [
+      {
+        "text": "Arteries that supply distinct tissue areas but lack sufficient anastomoses to maintain viability if occluded",
+        "isCorrect": true
+      },
+      {
+        "text": "Arteries with extensive precapillary anastomoses",
+        "isCorrect": false
+      },
+      {
+        "text": "Arteries that possess large arteriovenous shunts bypassing capillary beds",
+        "isCorrect": false
+      },
+      {
+        "text": "Arteries that communicate freely at the macrovascular level but not at the microvascular level",
+        "isCorrect": false
+      }
+    ],
+    "explanation": "Functional end arteries do anastomose, but the anastomoses are insufficient to keep the tissue alive if occluded. Occlusion leads to infarction."
+  },
+  {
+    "importId": "ANDE-M16-ANAT-006",
+    "stem": "A 35-year-old male sustains a fracture of the fibular neck. He subsequently develops foot drop and a high-stepping gait. Which nerve is most likely injured?",
+    "subjectSlug": "anatomy",
+    "topicSlug": "anatomy-lower-limb",
+    "examRelevance": 8,
+    "difficulty": "easy",
+    "questionType": "SINGLE_BEST_ANSWER",
+    "provenance": "ORIGINAL",
+    "exam": "NEET_PG_INI_CET",
+    "options": [
+      {
+        "text": "Common peroneal nerve",
+        "isCorrect": true
+      },
+      {
+        "text": "Tibial nerve",
+        "isCorrect": false
+      },
+      {
+        "text": "Sural nerve",
+        "isCorrect": false
+      },
+      {
+        "text": "Saphenous nerve",
+        "isCorrect": false
+      }
+    ],
+    "explanation": "The common peroneal (fibular) nerve wraps around the fibular neck and is vulnerable here. Injury paralyzes the anterior/lateral compartments, causing foot drop."
+  },
+  {
+    "importId": "ANDE-M16-ANAT-007",
+    "stem": "A patient exhibits a positive Trendelenburg sign on the right side when asked to stand on her right leg. Which nerve is compromised?",
+    "subjectSlug": "anatomy",
+    "topicSlug": "anatomy-lower-limb",
+    "examRelevance": 8,
+    "difficulty": "medium",
+    "questionType": "SINGLE_BEST_ANSWER",
+    "provenance": "ORIGINAL",
+    "exam": "NEET_PG_INI_CET",
+    "options": [
+      {
+        "text": "Right obturator nerve",
+        "isCorrect": false
+      },
+      {
+        "text": "Right inferior gluteal nerve",
+        "isCorrect": false
+      },
+      {
+        "text": "Right femoral nerve",
+        "isCorrect": false
+      },
+      {
+        "text": "Right superior gluteal nerve",
+        "isCorrect": true
+      }
+    ],
+    "explanation": "The superior gluteal nerve supplies gluteus medius and minimus, responsible for stabilizing the pelvis. Weakness leads to a positive Trendelenburg sign on the affected side."
+  },
+  {
+    "importId": "ANDE-M16-ANAT-008",
+    "stem": "Which muscle is primarily responsible for 'unlocking' the extended knee joint by laterally rotating the femur on the fixed tibia?",
+    "subjectSlug": "anatomy",
+    "topicSlug": "anatomy-lower-limb",
+    "examRelevance": 8,
+    "difficulty": "medium",
+    "questionType": "SINGLE_BEST_ANSWER",
+    "provenance": "ORIGINAL",
+    "exam": "NEET_PG_INI_CET",
+    "options": [
+      {
+        "text": "Plantaris",
+        "isCorrect": false
+      },
+      {
+        "text": "Popliteus",
+        "isCorrect": true
+      },
+      {
+        "text": "Semimembranosus",
+        "isCorrect": false
+      },
+      {
+        "text": "Biceps femoris",
+        "isCorrect": false
+      }
+    ],
+    "explanation": "The popliteus unlocks the knee joint by laterally rotating the femur on the fixed tibia (or medially rotating the tibia on unplanted femur) to initiate flexion."
+  },
+  {
+    "importId": "ANDE-M16-ANAT-009",
+    "stem": "Which of the following arteries does NOT typically participate in the cruciate anastomosis of the thigh?",
+    "subjectSlug": "anatomy",
+    "topicSlug": "anatomy-lower-limb",
+    "examRelevance": 8,
+    "difficulty": "hard",
+    "questionType": "SINGLE_BEST_ANSWER",
+    "provenance": "ORIGINAL",
+    "exam": "NEET_PG_INI_CET",
+    "options": [
+      {
+        "text": "Superior gluteal artery",
+        "isCorrect": true
+      },
+      {
+        "text": "Medial circumflex femoral artery",
+        "isCorrect": false
+      },
+      {
+        "text": "First perforating artery",
+        "isCorrect": false
+      },
+      {
+        "text": "Inferior gluteal artery",
+        "isCorrect": false
+      }
+    ],
+    "explanation": "The cruciate anastomosis includes the inferior gluteal, medial circumflex, lateral circumflex, and first perforating arteries. The superior gluteal artery does not participate."
+  },
+  {
+    "importId": "ANDE-M16-ANAT-010",
+    "stem": "A 50-year-old woman undergoes stripping of the great saphenous vein. Postoperatively, she complains of numbness along the medial border of her foot. Which nerve was injured?",
+    "subjectSlug": "anatomy",
+    "topicSlug": "anatomy-lower-limb",
+    "examRelevance": 8,
+    "difficulty": "hard",
+    "questionType": "SINGLE_BEST_ANSWER",
+    "provenance": "ORIGINAL",
+    "exam": "NEET_PG_INI_CET",
+    "options": [
+      {
+        "text": "Saphenous nerve",
+        "isCorrect": true
+      },
+      {
+        "text": "Sural nerve",
+        "isCorrect": false
+      },
+      {
+        "text": "Superficial peroneal nerve",
+        "isCorrect": false
+      },
+      {
+        "text": "Deep peroneal nerve",
+        "isCorrect": false
+      }
+    ],
+    "explanation": "The saphenous nerve accompanies the great saphenous vein in the lower leg and can be injured during vein stripping, causing numbness on the medial aspect of the foot."
+  },
+  {
+    "importId": "ANDE-M16-ANAT-011",
+    "stem": "The sternal angle (of Louis) corresponds to the level of the intervertebral disc between which two thoracic vertebrae?",
+    "subjectSlug": "anatomy",
+    "topicSlug": "anatomy-thorax",
+    "examRelevance": 8,
+    "difficulty": "easy",
+    "questionType": "SINGLE_BEST_ANSWER",
+    "provenance": "ORIGINAL",
+    "exam": "NEET_PG_INI_CET",
+    "options": [
+      {
+        "text": "T4 and T5",
+        "isCorrect": true
+      },
+      {
+        "text": "T8 and T9",
+        "isCorrect": false
+      },
+      {
+        "text": "T2 and T3",
+        "isCorrect": false
+      },
+      {
+        "text": "T6 and T7",
+        "isCorrect": false
+      }
+    ],
+    "explanation": "The sternal angle lies at the intervertebral disc between T4 and T5. It marks the tracheal bifurcation, aortic arch ends, and superior/inferior mediastinum boundary."
+  },
+  {
+    "importId": "ANDE-M16-ANAT-012",
+    "stem": "In the posterior mediastinum, the azygos vein arches over the root of the right lung to terminate directly into which vascular structure?",
+    "subjectSlug": "anatomy",
+    "topicSlug": "anatomy-thorax",
+    "examRelevance": 8,
+    "difficulty": "medium",
+    "questionType": "SINGLE_BEST_ANSWER",
+    "provenance": "ORIGINAL",
+    "exam": "NEET_PG_INI_CET",
+    "options": [
+      {
+        "text": "Right atrium",
+        "isCorrect": false
+      },
+      {
+        "text": "Superior vena cava",
+        "isCorrect": true
+      },
+      {
+        "text": "Inferior vena cava",
+        "isCorrect": false
+      },
+      {
+        "text": "Right brachiocephalic vein",
+        "isCorrect": false
+      }
+    ],
+    "explanation": "The azygos vein ascends, passes behind the right lung root, and arches over the right main bronchus to drain into the superior vena cava."
+  },
+  {
+    "importId": "ANDE-M16-ANAT-013",
+    "stem": "An aspirated foreign body is more likely to enter the right main bronchus than the left because the right bronchus is:",
+    "subjectSlug": "anatomy",
+    "topicSlug": "anatomy-thorax",
+    "examRelevance": 8,
+    "difficulty": "medium",
+    "questionType": "SINGLE_BEST_ANSWER",
+    "provenance": "ORIGINAL",
+    "exam": "NEET_PG_INI_CET",
+    "options": [
+      {
+        "text": "Wider, shorter, and more vertical than the left",
+        "isCorrect": true
+      },
+      {
+        "text": "Narrower, longer, and more horizontal than the left",
+        "isCorrect": false
+      },
+      {
+        "text": "Deflected strongly by the carina towards the right side",
+        "isCorrect": false
+      },
+      {
+        "text": "Originating at a higher vertebral level than the left",
+        "isCorrect": false
+      }
+    ],
+    "explanation": "The right main bronchus is wider, shorter, and more vertical, making it a more direct continuation of the trachea and the most common site for aspirated foreign bodies."
+  },
+  {
+    "importId": "ANDE-M16-ANAT-014",
+    "stem": "Which of the following structures descends through the posterior mediastinum and passes through the aortic hiatus of the diaphragm?",
+    "subjectSlug": "anatomy",
+    "topicSlug": "anatomy-thorax",
+    "examRelevance": 8,
+    "difficulty": "hard",
+    "questionType": "SINGLE_BEST_ANSWER",
+    "provenance": "ORIGINAL",
+    "exam": "NEET_PG_INI_CET",
+    "options": [
+      {
+        "text": "Sympathetic trunk",
+        "isCorrect": false
+      },
+      {
+        "text": "Esophagus",
+        "isCorrect": false
+      },
+      {
+        "text": "Phrenic nerve",
+        "isCorrect": false
+      },
+      {
+        "text": "Thoracic duct",
+        "isCorrect": true
+      }
+    ],
+    "explanation": "The thoracic duct lies in the posterior mediastinum and enters the thorax through the aortic hiatus of the diaphragm along with the descending aorta and azygos vein."
+  },
+  {
+    "importId": "ANDE-M16-ANAT-015",
+    "stem": "In a patient with right-dominant coronary circulation, the artery supplying the atrioventricular (AV) node typically arises from which vessel?",
+    "subjectSlug": "anatomy",
+    "topicSlug": "anatomy-thorax",
+    "examRelevance": 8,
+    "difficulty": "hard",
+    "questionType": "SINGLE_BEST_ANSWER",
+    "provenance": "ORIGINAL",
+    "exam": "NEET_PG_INI_CET",
+    "options": [
+      {
+        "text": "Coronary sinus",
+        "isCorrect": false
+      },
+      {
+        "text": "Left circumflex artery",
+        "isCorrect": false
+      },
+      {
+        "text": "Left anterior descending artery",
+        "isCorrect": false
+      },
+      {
+        "text": "Right coronary artery",
+        "isCorrect": true
+      }
+    ],
+    "explanation": "In right-dominant circulation (~80% of individuals), the right coronary artery supplies the posterior descending artery and also gives off the AV nodal branch."
+  },
+  {
+    "importId": "ANDE-M16-ANAT-016",
+    "stem": "Early periumbilical pain in acute appendicitis is referred visceral pain carried by afferent fibers entering the spinal cord at which dermatomal level?",
+    "subjectSlug": "anatomy",
+    "topicSlug": "anatomy-abdomen",
+    "examRelevance": 8,
+    "difficulty": "easy",
+    "questionType": "SINGLE_BEST_ANSWER",
+    "provenance": "ORIGINAL",
+    "exam": "NEET_PG_INI_CET",
+    "options": [
+      {
+        "text": "T10",
+        "isCorrect": true
+      },
+      {
+        "text": "T8",
+        "isCorrect": false
+      },
+      {
+        "text": "T12",
+        "isCorrect": false
+      },
+      {
+        "text": "L2",
+        "isCorrect": false
+      }
+    ],
+    "explanation": "The appendix is supplied by T10 sympathetic fibers. Referred pain is classically felt in the T10 dermatome, which surrounds the umbilicus."
+  },
+  {
+    "importId": "ANDE-M16-ANAT-017",
+    "stem": "During an open repair, a surgeon identifies a hernia sac protruding through Hesselbach's triangle, medial to the inferior epigastric vessels. What type of hernia is this?",
+    "subjectSlug": "anatomy",
+    "topicSlug": "anatomy-abdomen",
+    "examRelevance": 8,
+    "difficulty": "medium",
+    "questionType": "SINGLE_BEST_ANSWER",
+    "provenance": "ORIGINAL",
+    "exam": "NEET_PG_INI_CET",
+    "options": [
+      {
+        "text": "Spigelian hernia",
+        "isCorrect": false
+      },
+      {
+        "text": "Femoral hernia",
+        "isCorrect": false
+      },
+      {
+        "text": "Indirect inguinal hernia",
+        "isCorrect": false
+      },
+      {
+        "text": "Direct inguinal hernia",
+        "isCorrect": true
+      }
+    ],
+    "explanation": "Direct inguinal hernias protrude medial to the inferior epigastric vessels through Hesselbach's triangle. Indirect hernias pass lateral to these vessels through the deep inguinal ring."
+  },
+  {
+    "importId": "ANDE-M16-ANAT-018",
+    "stem": "Superior mesenteric artery (SMA) syndrome involves the acute mechanical compression of which structure between the SMA and the abdominal aorta?",
+    "subjectSlug": "anatomy",
+    "topicSlug": "anatomy-abdomen",
+    "examRelevance": 8,
+    "difficulty": "medium",
+    "questionType": "SINGLE_BEST_ANSWER",
+    "provenance": "ORIGINAL",
+    "exam": "NEET_PG_INI_CET",
+    "options": [
+      {
+        "text": "First part of the duodenum",
+        "isCorrect": false
+      },
+      {
+        "text": "Third part of the duodenum",
+        "isCorrect": true
+      },
+      {
+        "text": "Second part of the duodenum",
+        "isCorrect": false
+      },
+      {
+        "text": "Pylorus of the stomach",
+        "isCorrect": false
+      }
+    ],
+    "explanation": "The third (transverse) part of the duodenum crosses the aorta directly behind the superior mesenteric artery, making it vulnerable to compression in SMA syndrome."
+  },
+  {
+    "importId": "ANDE-M16-ANAT-019",
+    "stem": "Caput medusae in a cirrhotic patient results from the engorgement of porto-systemic anastomoses between the paraumbilical veins and which venous system?",
+    "subjectSlug": "anatomy",
+    "topicSlug": "anatomy-abdomen",
+    "examRelevance": 8,
+    "difficulty": "hard",
+    "questionType": "SINGLE_BEST_ANSWER",
+    "provenance": "ORIGINAL",
+    "exam": "NEET_PG_INI_CET",
+    "options": [
+      {
+        "text": "Lumbar veins",
+        "isCorrect": false
+      },
+      {
+        "text": "Hepatic veins",
+        "isCorrect": false
+      },
+      {
+        "text": "Superficial epigastric veins",
+        "isCorrect": true
+      },
+      {
+        "text": "Inferior mesenteric veins",
+        "isCorrect": false
+      }
+    ],
+    "explanation": "Caput medusae forms when portal hypertension forces blood backward through paraumbilical veins into the superficial epigastric veins of the systemic circulation."
+  },
+  {
+    "importId": "ANDE-M16-ANAT-020",
+    "stem": "When performing the Pringle maneuver (clamping the hepatoduodenal ligament), which structure forms the immediate posterior boundary of the epiploic foramen?",
+    "subjectSlug": "anatomy",
+    "topicSlug": "anatomy-abdomen",
+    "examRelevance": 8,
+    "difficulty": "hard",
+    "questionType": "SINGLE_BEST_ANSWER",
+    "provenance": "ORIGINAL",
+    "exam": "NEET_PG_INI_CET",
+    "options": [
+      {
+        "text": "Right crus of the diaphragm",
+        "isCorrect": false
+      },
+      {
+        "text": "Abdominal aorta",
+        "isCorrect": false
+      },
+      {
+        "text": "Portal vein",
+        "isCorrect": false
+      },
+      {
+        "text": "Inferior vena cava",
+        "isCorrect": true
+      }
+    ],
+    "explanation": "The epiploic foramen of Winslow is bounded anteriorly by the hepatoduodenal ligament and posteriorly by the inferior vena cava."
+  },
+  {
+    "importId": "ANDE-M16-ANAT-021",
+    "stem": "Excluding the external urethral meatus, which portion of the male urethra is anatomically the narrowest and least distensible?",
+    "subjectSlug": "anatomy",
+    "topicSlug": "anatomy-pelvis-and-perineum",
+    "examRelevance": 8,
+    "difficulty": "easy",
+    "questionType": "SINGLE_BEST_ANSWER",
+    "provenance": "ORIGINAL",
+    "exam": "NEET_PG_INI_CET",
+    "options": [
+      {
+        "text": "Membranous urethra",
+        "isCorrect": true
+      },
+      {
+        "text": "Bulbar urethra",
+        "isCorrect": false
+      },
+      {
+        "text": "Penile (spongy) urethra",
+        "isCorrect": false
+      },
+      {
+        "text": "Prostatic urethra",
+        "isCorrect": false
+      }
+    ],
+    "explanation": "The membranous urethra passes through the deep perineal pouch and perineal membrane. It is the narrowest, shortest, and least distensible part, making it prone to catheter injury."
+  },
+  {
+    "importId": "ANDE-M16-ANAT-022",
+    "stem": "A transvaginal pudendal nerve block is administered to a woman in labor. Which palpable bony landmark is used to guide the injection needle?",
+    "subjectSlug": "anatomy",
+    "topicSlug": "anatomy-pelvis-and-perineum",
+    "examRelevance": 8,
+    "difficulty": "medium",
+    "questionType": "SINGLE_BEST_ANSWER",
+    "provenance": "ORIGINAL",
+    "exam": "NEET_PG_INI_CET",
+    "options": [
+      {
+        "text": "Ischial spine",
+        "isCorrect": true
+      },
+      {
+        "text": "Ischial tuberosity",
+        "isCorrect": false
+      },
+      {
+        "text": "Pubic symphysis",
+        "isCorrect": false
+      },
+      {
+        "text": "Posterior superior iliac spine",
+        "isCorrect": false
+      }
+    ],
+    "explanation": "The pudendal nerve crosses the posterior aspect of the sacrospinous ligament near the ischial spine, which is palpated transvaginally to guide the block."
+  },
+  {
+    "importId": "ANDE-M16-ANAT-023",
+    "stem": "During a radical hysterectomy, the ureter is most vulnerable to iatrogenic injury where it passes directly under the uterine artery near which structure?",
+    "subjectSlug": "anatomy",
+    "topicSlug": "anatomy-pelvis-and-perineum",
+    "examRelevance": 8,
+    "difficulty": "medium",
+    "questionType": "SINGLE_BEST_ANSWER",
+    "provenance": "ORIGINAL",
+    "exam": "NEET_PG_INI_CET",
+    "options": [
+      {
+        "text": "The lateral fornix of the vagina",
+        "isCorrect": true
+      },
+      {
+        "text": "The infundibulopelvic ligament",
+        "isCorrect": false
+      },
+      {
+        "text": "The round ligament of the uterus",
+        "isCorrect": false
+      },
+      {
+        "text": "The ovarian ligament",
+        "isCorrect": false
+      }
+    ],
+    "explanation": "The ureter passes inferior to the uterine artery ('water under the bridge') near the lateral vaginal fornix and cervix, making it highly susceptible to injury during ligation."
+  },
+  {
+    "importId": "ANDE-M16-ANAT-024",
+    "stem": "Carcinoma of the prostate most frequently spreads via the lymphatic system first to which group of lymph nodes?",
+    "subjectSlug": "anatomy",
+    "topicSlug": "anatomy-pelvis-and-perineum",
+    "examRelevance": 8,
+    "difficulty": "hard",
+    "questionType": "SINGLE_BEST_ANSWER",
+    "provenance": "ORIGINAL",
+    "exam": "NEET_PG_INI_CET",
+    "options": [
+      {
+        "text": "Internal iliac nodes",
+        "isCorrect": true
+      },
+      {
+        "text": "Superficial inguinal nodes",
+        "isCorrect": false
+      },
+      {
+        "text": "Deep inguinal nodes",
+        "isCorrect": false
+      },
+      {
+        "text": "Lumbar (para-aortic) nodes",
+        "isCorrect": false
+      }
+    ],
+    "explanation": "Primary lymphatic drainage of the prostate goes to the internal iliac and sacral lymph nodes, representing the first sites of regional metastasis."
+  },
+  {
+    "importId": "ANDE-M16-ANAT-025",
+    "stem": "Which of the following structures is located strictly within the deep perineal pouch in males?",
+    "subjectSlug": "anatomy",
+    "topicSlug": "anatomy-pelvis-and-perineum",
+    "examRelevance": 8,
+    "difficulty": "hard",
+    "questionType": "SINGLE_BEST_ANSWER",
+    "provenance": "ORIGINAL",
+    "exam": "NEET_PG_INI_CET",
+    "options": [
+      {
+        "text": "Bulbospongiosus muscle",
+        "isCorrect": false
+      },
+      {
+        "text": "Crura of the penis",
+        "isCorrect": false
+      },
+      {
+        "text": "Greater vestibular (Bartholin's) glands",
+        "isCorrect": false
+      },
+      {
+        "text": "Bulbourethral (Cowper's) glands",
+        "isCorrect": true
+      }
+    ],
+    "explanation": "The deep perineal pouch in males contains the membranous urethra, deep transverse perineal muscles, sphincter urethrae, and bulbourethral glands."
+  },
+  {
+    "importId": "ANDE-M16-ANAT-026",
+    "stem": "A man presents with sudden inability to close his right eye, loss of right forehead wrinkles, and drooping of the right corner of his mouth. Which cranial nerve is affected?",
+    "subjectSlug": "anatomy",
+    "topicSlug": "anatomy-head-and-neck",
+    "examRelevance": 8,
+    "difficulty": "easy",
+    "questionType": "SINGLE_BEST_ANSWER",
+    "provenance": "ORIGINAL",
+    "exam": "NEET_PG_INI_CET",
+    "options": [
+      {
+        "text": "Vagus nerve",
+        "isCorrect": false
+      },
+      {
+        "text": "Glossopharyngeal nerve",
+        "isCorrect": false
+      },
+      {
+        "text": "Trigeminal nerve",
+        "isCorrect": false
+      },
+      {
+        "text": "Facial nerve",
+        "isCorrect": true
+      }
+    ],
+    "explanation": "Bell's palsy is a lower motor neuron lesion of the facial nerve (CN VII), paralyzing all muscles of facial expression on the ipsilateral side."
+  },
+  {
+    "importId": "ANDE-M16-ANAT-027",
+    "stem": "Infections in the 'danger triangle of the face' spread retrogradely to the cavernous sinus primarily via communications between the facial vein and which veins?",
+    "subjectSlug": "anatomy",
+    "topicSlug": "anatomy-head-and-neck",
+    "examRelevance": 8,
+    "difficulty": "medium",
+    "questionType": "SINGLE_BEST_ANSWER",
+    "provenance": "ORIGINAL",
+    "exam": "NEET_PG_INI_CET",
+    "options": [
+      {
+        "text": "Superior and inferior ophthalmic veins",
+        "isCorrect": true
+      },
+      {
+        "text": "Maxillary veins",
+        "isCorrect": false
+      },
+      {
+        "text": "Retromandibular veins",
+        "isCorrect": false
+      },
+      {
+        "text": "Internal jugular veins",
+        "isCorrect": false
+      }
+    ],
+    "explanation": "The facial vein communicates with the ophthalmic veins, which drain into the cavernous sinus. The lack of valves permits retrograde spread of infection."
+  },
+  {
+    "importId": "ANDE-M16-ANAT-028",
+    "stem": "Which of the following muscles of mastication is primarily responsible for depressing the mandible to open the mouth?",
+    "subjectSlug": "anatomy",
+    "topicSlug": "anatomy-head-and-neck",
+    "examRelevance": 8,
+    "difficulty": "medium",
+    "questionType": "SINGLE_BEST_ANSWER",
+    "provenance": "ORIGINAL",
+    "exam": "NEET_PG_INI_CET",
+    "options": [
+      {
+        "text": "Medial pterygoid",
+        "isCorrect": false
+      },
+      {
+        "text": "Masseter",
+        "isCorrect": false
+      },
+      {
+        "text": "Lateral pterygoid",
+        "isCorrect": true
+      },
+      {
+        "text": "Temporalis",
+        "isCorrect": false
+      }
+    ],
+    "explanation": "The lateral pterygoid is the only muscle of mastication that depresses the mandible (opens the mouth). The other three elevate it."
+  },
+  {
+    "importId": "ANDE-M16-ANAT-029",
+    "stem": "A Pancoast tumor at the apex of the right lung causes right-sided ptosis, miosis, and anhidrosis. This is due to the tumor's compression of which structure?",
+    "subjectSlug": "anatomy",
+    "topicSlug": "anatomy-head-and-neck",
+    "examRelevance": 8,
+    "difficulty": "hard",
+    "questionType": "SINGLE_BEST_ANSWER",
+    "provenance": "ORIGINAL",
+    "exam": "NEET_PG_INI_CET",
+    "options": [
+      {
+        "text": "Cervical sympathetic chain",
+        "isCorrect": true
+      },
+      {
+        "text": "Recurrent laryngeal nerve",
+        "isCorrect": false
+      },
+      {
+        "text": "Vagus nerve",
+        "isCorrect": false
+      },
+      {
+        "text": "Phrenic nerve",
+        "isCorrect": false
+      }
+    ],
+    "explanation": "Invasion of the cervical sympathetic chain leads to ipsilateral Horner's syndrome (ptosis, miosis, anhidrosis)."
+  },
+  {
+    "importId": "ANDE-M16-ANAT-030",
+    "stem": "Frey's syndrome (sweating/flushing of the cheek while eating) occurs after parotid surgery due to aberrant regeneration of parasympathetic fibers into the territory of which nerve?",
+    "subjectSlug": "anatomy",
+    "topicSlug": "anatomy-head-and-neck",
+    "examRelevance": 8,
+    "difficulty": "hard",
+    "questionType": "SINGLE_BEST_ANSWER",
+    "provenance": "ORIGINAL",
+    "exam": "NEET_PG_INI_CET",
+    "options": [
+      {
+        "text": "Auriculotemporal nerve",
+        "isCorrect": true
+      },
+      {
+        "text": "Greater auricular nerve",
+        "isCorrect": false
+      },
+      {
+        "text": "Facial nerve",
+        "isCorrect": false
+      },
+      {
+        "text": "Buccal nerve",
+        "isCorrect": false
+      }
+    ],
+    "explanation": "Damaged parasympathetic secretomotor fibers aberrantly regenerate and join sympathetic pathways in the auriculotemporal nerve, causing gustatory sweating."
+  },
+  {
+    "importId": "ANDE-M16-ANAT-031",
+    "stem": "Cerebrospinal fluid (CSF) circulates through the ventricles to protect the brain. It is primarily produced by which of the following structures?",
+    "subjectSlug": "anatomy",
+    "topicSlug": "anatomy-neuroanatomy",
+    "examRelevance": 8,
+    "difficulty": "easy",
+    "questionType": "SINGLE_BEST_ANSWER",
+    "provenance": "ORIGINAL",
+    "exam": "NEET_PG_INI_CET",
+    "options": [
+      {
+        "text": "Choroid plexus",
+        "isCorrect": true
+      },
+      {
+        "text": "Ependymal cells lining the central canal",
+        "isCorrect": false
+      },
+      {
+        "text": "Arachnoid granulations",
+        "isCorrect": false
+      },
+      {
+        "text": "Pia mater",
+        "isCorrect": false
+      }
+    ],
+    "explanation": "CSF is actively secreted by the choroid plexus located within the lateral, third, and fourth ventricles. It is resorbed by arachnoid granulations."
+  },
+  {
+    "importId": "ANDE-M16-ANAT-032",
+    "stem": "A knife wound causes a clean right-sided hemisection of the spinal cord at T10. Which clinical finding is expected below the level of the lesion?",
+    "subjectSlug": "anatomy",
+    "topicSlug": "anatomy-neuroanatomy",
+    "examRelevance": 8,
+    "difficulty": "medium",
+    "questionType": "SINGLE_BEST_ANSWER",
+    "provenance": "ORIGINAL",
+    "exam": "NEET_PG_INI_CET",
+    "options": [
+      {
+        "text": "Contralateral loss of pain and temperature sensation",
+        "isCorrect": true
+      },
+      {
+        "text": "Contralateral spastic paralysis",
+        "isCorrect": false
+      },
+      {
+        "text": "Contralateral loss of proprioception and vibration",
+        "isCorrect": false
+      },
+      {
+        "text": "Ipsilateral loss of pain and temperature sensation",
+        "isCorrect": false
+      }
+    ],
+    "explanation": "Brown-Sequard syndrome causes ipsilateral spastic paralysis and loss of proprioception, but contralateral loss of pain and temperature due to spinothalamic tract decussation."
+  },
+  {
+    "importId": "ANDE-M16-ANAT-033",
+    "stem": "A stroke patient fully understands instructions but produces halting, non-fluent, and effortful speech. The lesion most likely affects which area?",
+    "subjectSlug": "anatomy",
+    "topicSlug": "anatomy-neuroanatomy",
+    "examRelevance": 8,
+    "difficulty": "medium",
+    "questionType": "SINGLE_BEST_ANSWER",
+    "provenance": "ORIGINAL",
+    "exam": "NEET_PG_INI_CET",
+    "options": [
+      {
+        "text": "Inferior frontal gyrus (Broca's area)",
+        "isCorrect": true
+      },
+      {
+        "text": "Superior temporal gyrus (Wernicke's area)",
+        "isCorrect": false
+      },
+      {
+        "text": "Precentral gyrus (Primary motor cortex)",
+        "isCorrect": false
+      },
+      {
+        "text": "Angular gyrus",
+        "isCorrect": false
+      }
+    ],
+    "explanation": "Broca's area in the dominant inferior frontal gyrus coordinates speech production. A lesion here causes expressive, non-fluent aphasia with preserved comprehension."
+  },
+  {
+    "importId": "ANDE-M16-ANAT-034",
+    "stem": "Wallenberg syndrome (vertigo, dysphagia, right facial numbness, left body numbness, right Horner's syndrome) is most likely due to occlusion of which artery?",
+    "subjectSlug": "anatomy",
+    "topicSlug": "anatomy-neuroanatomy",
+    "examRelevance": 8,
+    "difficulty": "hard",
+    "questionType": "SINGLE_BEST_ANSWER",
+    "provenance": "ORIGINAL",
+    "exam": "NEET_PG_INI_CET",
+    "options": [
+      {
+        "text": "Superior cerebellar artery",
+        "isCorrect": false
+      },
+      {
+        "text": "Basilar artery",
+        "isCorrect": false
+      },
+      {
+        "text": "Anterior inferior cerebellar artery (AICA)",
+        "isCorrect": false
+      },
+      {
+        "text": "Posterior inferior cerebellar artery (PICA)",
+        "isCorrect": true
+      }
+    ],
+    "explanation": "Lateral Medullary Syndrome is classically caused by occlusion of the PICA or vertebral artery, leading to crossed sensory signs and bulbar weakness."
+  },
+  {
+    "importId": "ANDE-M16-ANAT-035",
+    "stem": "Weber's syndrome (ipsilateral oculomotor nerve palsy and contralateral spastic hemiparesis) indicates a lesion in which specific region of the brainstem?",
+    "subjectSlug": "anatomy",
+    "topicSlug": "anatomy-neuroanatomy",
+    "examRelevance": 8,
+    "difficulty": "hard",
+    "questionType": "SINGLE_BEST_ANSWER",
+    "provenance": "ORIGINAL",
+    "exam": "NEET_PG_INI_CET",
+    "options": [
+      {
+        "text": "Midbrain",
+        "isCorrect": true
+      },
+      {
+        "text": "Thalamus",
+        "isCorrect": false
+      },
+      {
+        "text": "Medulla oblongata",
+        "isCorrect": false
+      },
+      {
+        "text": "Pons",
+        "isCorrect": false
+      }
+    ],
+    "explanation": "Weber's syndrome is a midbrain infarct affecting the cerebral peduncle and the exiting fascicles of the oculomotor nerve (CN III)."
+  },
+  {
+    "importId": "ANDE-M16-ANAT-036",
+    "stem": "The mandible and the muscles of mastication are derived from which embryonic pharyngeal arch?",
+    "subjectSlug": "anatomy",
+    "topicSlug": "anatomy-embryology",
+    "examRelevance": 8,
+    "difficulty": "easy",
+    "questionType": "SINGLE_BEST_ANSWER",
+    "provenance": "ORIGINAL",
+    "exam": "NEET_PG_INI_CET",
+    "options": [
+      {
+        "text": "Fourth pharyngeal arch",
+        "isCorrect": false
+      },
+      {
+        "text": "Second pharyngeal arch",
+        "isCorrect": false
+      },
+      {
+        "text": "Third pharyngeal arch",
+        "isCorrect": false
+      },
+      {
+        "text": "First pharyngeal arch",
+        "isCorrect": true
+      }
+    ],
+    "explanation": "The first pharyngeal (mandibular) arch gives rise to the mandible, maxilla, malleus, incus, and the muscles of mastication, innervated by CN V3."
+  },
+  {
+    "importId": "ANDE-M16-ANAT-037",
+    "stem": "The fundamental embryological defect that leads to the four classic features of Tetralogy of Fallot is the anterosuperior displacement of which structure?",
+    "subjectSlug": "anatomy",
+    "topicSlug": "anatomy-embryology",
+    "examRelevance": 8,
+    "difficulty": "medium",
+    "questionType": "SINGLE_BEST_ANSWER",
+    "provenance": "ORIGINAL",
+    "exam": "NEET_PG_INI_CET",
+    "options": [
+      {
+        "text": "Septum primum",
+        "isCorrect": false
+      },
+      {
+        "text": "Infundibular (conotruncal) septum",
+        "isCorrect": true
+      },
+      {
+        "text": "Aorticopulmonary septum",
+        "isCorrect": false
+      },
+      {
+        "text": "Endocardial cushions",
+        "isCorrect": false
+      }
+    ],
+    "explanation": "Anterosuperior displacement of the infundibular septum unequally divides the truncus arteriosus, causing pulmonary stenosis, VSD, and overriding aorta."
+  },
+  {
+    "importId": "ANDE-M16-ANAT-038",
+    "stem": "The uncinate process and the inferior part of the head of the pancreas are derived from which embryonic structure?",
+    "subjectSlug": "anatomy",
+    "topicSlug": "anatomy-embryology",
+    "examRelevance": 8,
+    "difficulty": "medium",
+    "questionType": "SINGLE_BEST_ANSWER",
+    "provenance": "ORIGINAL",
+    "exam": "NEET_PG_INI_CET",
+    "options": [
+      {
+        "text": "Ventral pancreatic bud",
+        "isCorrect": true
+      },
+      {
+        "text": "Dorsal pancreatic bud",
+        "isCorrect": false
+      },
+      {
+        "text": "Hepatic diverticulum",
+        "isCorrect": false
+      },
+      {
+        "text": "Midgut loop",
+        "isCorrect": false
+      }
+    ],
+    "explanation": "The ventral pancreatic bud rotates dorsally to fuse with the dorsal bud. It forms the uncinate process and the inferior head of the pancreas."
+  },
+  {
+    "importId": "ANDE-M16-ANAT-039",
+    "stem": "Meckel's diverticulum, which can contain ectopic gastric mucosa and cause painless lower GI bleeding, is a persistent remnant of which embryonic structure?",
+    "subjectSlug": "anatomy",
+    "topicSlug": "anatomy-embryology",
+    "examRelevance": 8,
+    "difficulty": "hard",
+    "questionType": "SINGLE_BEST_ANSWER",
+    "provenance": "ORIGINAL",
+    "exam": "NEET_PG_INI_CET",
+    "options": [
+      {
+        "text": "Cloaca",
+        "isCorrect": false
+      },
+      {
+        "text": "Allantois",
+        "isCorrect": false
+      },
+      {
+        "text": "Vitelline (omphalomesenteric) duct",
+        "isCorrect": true
+      },
+      {
+        "text": "Urachus",
+        "isCorrect": false
+      }
+    ],
+    "explanation": "Meckel's diverticulum is a true diverticulum that is a remnant of the vitelline duct connecting the embryonic midgut to the yolk sac."
+  },
+  {
+    "importId": "ANDE-M16-ANAT-040",
+    "stem": "Which of the following embryonic structures does NOT contribute to the normal development of the diaphragm?",
+    "subjectSlug": "anatomy",
+    "topicSlug": "anatomy-embryology",
+    "examRelevance": 8,
+    "difficulty": "hard",
+    "questionType": "SINGLE_BEST_ANSWER",
+    "provenance": "ORIGINAL",
+    "exam": "NEET_PG_INI_CET",
+    "options": [
+      {
+        "text": "Septum transversum",
+        "isCorrect": false
+      },
+      {
+        "text": "Dorsal mesentery of the esophagus",
+        "isCorrect": false
+      },
+      {
+        "text": "Pleuroperitoneal folds",
+        "isCorrect": false
+      },
+      {
+        "text": "Urogenital ridge",
+        "isCorrect": true
+      }
+    ],
+    "explanation": "The diaphragm forms from the septum transversum, pleuroperitoneal folds, dorsal mesentery of the esophagus, and body wall mesoderm. The urogenital ridge does not contribute."
+  },
+  {
+    "importId": "ANDE-M16-ANAT-041",
+    "stem": "The mucosal lining of the human urinary bladder is composed of which specific type of epithelium to accommodate significant distension?",
+    "subjectSlug": "anatomy",
+    "topicSlug": "anatomy-histology",
+    "examRelevance": 8,
+    "difficulty": "easy",
+    "questionType": "SINGLE_BEST_ANSWER",
+    "provenance": "ORIGINAL",
+    "exam": "NEET_PG_INI_CET",
+    "options": [
+      {
+        "text": "Simple cuboidal epithelium",
+        "isCorrect": false
+      },
+      {
+        "text": "Transitional epithelium (urothelium)",
+        "isCorrect": true
+      },
+      {
+        "text": "Stratified squamous non-keratinized epithelium",
+        "isCorrect": false
+      },
+      {
+        "text": "Pseudostratified ciliated columnar epithelium",
+        "isCorrect": false
+      }
+    ],
+    "explanation": "The urinary tract, from renal calyces to proximal urethra, is lined by transitional epithelium, allowing stretching without tearing."
+  },
+  {
+    "importId": "ANDE-M16-ANAT-042",
+    "stem": "Within the fundic glands of the stomach, which specific cells are responsible for the secretion of both hydrochloric acid (HCl) and intrinsic factor?",
+    "subjectSlug": "anatomy",
+    "topicSlug": "anatomy-histology",
+    "examRelevance": 8,
+    "difficulty": "medium",
+    "questionType": "SINGLE_BEST_ANSWER",
+    "provenance": "ORIGINAL",
+    "exam": "NEET_PG_INI_CET",
+    "options": [
+      {
+        "text": "Mucous neck cells",
+        "isCorrect": false
+      },
+      {
+        "text": "Enteroendocrine (G) cells",
+        "isCorrect": false
+      },
+      {
+        "text": "Chief cells",
+        "isCorrect": false
+      },
+      {
+        "text": "Parietal (oxyntic) cells",
+        "isCorrect": true
+      }
+    ],
+    "explanation": "Parietal cells secrete HCl for protein digestion and intrinsic factor, which is essential for vitamin B12 absorption in the terminal ileum."
+  },
+  {
+    "importId": "ANDE-M16-ANAT-043",
+    "stem": "In the microscopic architecture of the liver, what is the primary function or identity of the perisinusoidal space (of Disse)?",
+    "subjectSlug": "anatomy",
+    "topicSlug": "anatomy-histology",
+    "examRelevance": 8,
+    "difficulty": "medium",
+    "questionType": "SINGLE_BEST_ANSWER",
+    "provenance": "ORIGINAL",
+    "exam": "NEET_PG_INI_CET",
+    "options": [
+      {
+        "text": "It is the space between adjacent hepatocytes where bile canaliculi form.",
+        "isCorrect": false
+      },
+      {
+        "text": "It is the gap between fenestrated sinusoidal endothelial cells and hepatocytes, facilitating plasma exchange.",
+        "isCorrect": true
+      },
+      {
+        "text": "It is the primary site of hematopoiesis in the adult liver.",
+        "isCorrect": false
+      },
+      {
+        "text": "It is the space containing the portal triad within the hepatic lobule.",
+        "isCorrect": false
+      }
+    ],
+    "explanation": "The space of Disse lies between the sinusoids and hepatocytes. It contains blood plasma, facilitating metabolic exchange, and houses hepatic stellate cells."
+  },
+  {
+    "importId": "ANDE-M16-ANAT-044",
+    "stem": "Which epidermal layer is prominently visible in thick skin (palms/soles) but is generally considered absent in thin skin?",
+    "subjectSlug": "anatomy",
+    "topicSlug": "anatomy-histology",
+    "examRelevance": 8,
+    "difficulty": "hard",
+    "questionType": "SINGLE_BEST_ANSWER",
+    "provenance": "ORIGINAL",
+    "exam": "NEET_PG_INI_CET",
+    "options": [
+      {
+        "text": "Stratum lucidum",
+        "isCorrect": true
+      },
+      {
+        "text": "Stratum basale",
+        "isCorrect": false
+      },
+      {
+        "text": "Stratum granulosum",
+        "isCorrect": false
+      },
+      {
+        "text": "Stratum spinosum",
+        "isCorrect": false
+      }
+    ],
+    "explanation": "The stratum lucidum is a clear, translucent layer situated between the stratum granulosum and stratum corneum, found almost exclusively in thick skin."
+  },
+  {
+    "importId": "ANDE-M16-ANAT-045",
+    "stem": "In chronic left-sided heart failure, alveolar macrophages phagocytize red blood cells. These 'heart failure cells' are packed with which substance?",
+    "subjectSlug": "anatomy",
+    "topicSlug": "anatomy-histology",
+    "examRelevance": 8,
+    "difficulty": "hard",
+    "questionType": "SINGLE_BEST_ANSWER",
+    "provenance": "ORIGINAL",
+    "exam": "NEET_PG_INI_CET",
+    "options": [
+      {
+        "text": "Surfactant",
+        "isCorrect": false
+      },
+      {
+        "text": "Melanin",
+        "isCorrect": false
+      },
+      {
+        "text": "Lipofuscin",
+        "isCorrect": false
+      },
+      {
+        "text": "Hemosiderin",
+        "isCorrect": true
+      }
+    ],
+    "explanation": "Elevated pulmonary pressure causes erythrocytes to leak into alveoli. Macrophages phagocytize them, breaking down hemoglobin into hemosiderin pigment."
+  },
+  {
+    "importId": "ANDE-M16-ANAT-046",
+    "stem": "A newborn presents with upslanting palpebral fissures, a single palmar crease, and an AV septal defect. Which chromosomal abnormality is most likely?",
+    "subjectSlug": "anatomy",
+    "topicSlug": "anatomy-genetics-developmental-anatomy",
+    "examRelevance": 8,
+    "difficulty": "easy",
+    "questionType": "SINGLE_BEST_ANSWER",
+    "provenance": "ORIGINAL",
+    "exam": "NEET_PG_INI_CET",
+    "options": [
+      {
+        "text": "Trisomy 13",
+        "isCorrect": false
+      },
+      {
+        "text": "Monosomy X",
+        "isCorrect": false
+      },
+      {
+        "text": "Trisomy 21",
+        "isCorrect": true
+      },
+      {
+        "text": "Trisomy 18",
+        "isCorrect": false
+      }
+    ],
+    "explanation": "Down syndrome (Trisomy 21) is the most common chromosomal anomaly in liveborns, characterized by these classic facial features and heart defects."
+  },
+  {
+    "importId": "ANDE-M16-ANAT-047",
+    "stem": "A 16-year-old female is evaluated for primary amenorrhea, short stature, a webbed neck, and a broad chest. What is her most likely karyotype?",
+    "subjectSlug": "anatomy",
+    "topicSlug": "anatomy-genetics-developmental-anatomy",
+    "examRelevance": 8,
+    "difficulty": "medium",
+    "questionType": "SINGLE_BEST_ANSWER",
+    "provenance": "ORIGINAL",
+    "exam": "NEET_PG_INI_CET",
+    "options": [
+      {
+        "text": "47, XXY",
+        "isCorrect": false
+      },
+      {
+        "text": "47, XXX",
+        "isCorrect": false
+      },
+      {
+        "text": "46, XX",
+        "isCorrect": false
+      },
+      {
+        "text": "45, X",
+        "isCorrect": true
+      }
+    ],
+    "explanation": "Turner syndrome (45, X) affects females and presents with short stature, webbed neck, shield chest, and streak ovaries leading to primary amenorrhea."
+  },
+  {
+    "importId": "ANDE-M16-ANAT-048",
+    "stem": "A 25-year-old tall male with gynecomastia, small firm testes, and infertility is evaluated. What is his most likely karyotype?",
+    "subjectSlug": "anatomy",
+    "topicSlug": "anatomy-genetics-developmental-anatomy",
+    "examRelevance": 8,
+    "difficulty": "medium",
+    "questionType": "SINGLE_BEST_ANSWER",
+    "provenance": "ORIGINAL",
+    "exam": "NEET_PG_INI_CET",
+    "options": [
+      {
+        "text": "46, XX",
+        "isCorrect": false
+      },
+      {
+        "text": "47, XYY",
+        "isCorrect": false
+      },
+      {
+        "text": "47, XXY",
+        "isCorrect": true
+      },
+      {
+        "text": "46, XY",
+        "isCorrect": false
+      }
+    ],
+    "explanation": "Klinefelter syndrome (47, XXY) classically presents in males with tall stature, hypogonadism, gynecomastia, and infertility due to azoospermia."
+  },
+  {
+    "importId": "ANDE-M16-ANAT-049",
+    "stem": "DiGeorge syndrome (conotruncal anomalies, hypoplastic thymus, hypocalcemia) is associated with a microdeletion on which chromosome?",
+    "subjectSlug": "anatomy",
+    "topicSlug": "anatomy-genetics-developmental-anatomy",
+    "examRelevance": 8,
+    "difficulty": "hard",
+    "questionType": "SINGLE_BEST_ANSWER",
+    "provenance": "ORIGINAL",
+    "exam": "NEET_PG_INI_CET",
+    "options": [
+      {
+        "text": "Chromosome 22 (22q11.2)",
+        "isCorrect": true
+      },
+      {
+        "text": "Chromosome 5 (5p-)",
+        "isCorrect": false
+      },
+      {
+        "text": "Chromosome 15 (15q11-13)",
+        "isCorrect": false
+      },
+      {
+        "text": "Chromosome 11 (11p13)",
+        "isCorrect": false
+      }
+    ],
+    "explanation": "DiGeorge syndrome is a 22q11.2 microdeletion disorder affecting the 3rd and 4th pharyngeal pouches, causing thymic and parathyroid hypoplasia."
+  },
+  {
+    "importId": "ANDE-M16-ANAT-050",
+    "stem": "Prader-Willi and Angelman syndromes can result from a 15q11-13 microdeletion. The differing phenotypes based on parent of origin illustrate which genetic phenomenon?",
+    "subjectSlug": "anatomy",
+    "topicSlug": "anatomy-genetics-developmental-anatomy",
+    "examRelevance": 8,
+    "difficulty": "hard",
+    "questionType": "SINGLE_BEST_ANSWER",
+    "provenance": "ORIGINAL",
+    "exam": "NEET_PG_INI_CET",
+    "options": [
+      {
+        "text": "Mitochondrial inheritance",
+        "isCorrect": false
+      },
+      {
+        "text": "X-chromosome inactivation",
+        "isCorrect": false
+      },
+      {
+        "text": "Genomic imprinting",
+        "isCorrect": true
+      },
+      {
+        "text": "Anticipation",
+        "isCorrect": false
+      }
+    ],
+    "explanation": "Genomic imprinting is an epigenetic process where the expression of an allele depends on whether it was inherited from the mother or the father."
+  },
+  {
+    "importId": "ANDE-M16-ANAT-051",
+    "stem": "On a normal posteroanterior (PA) chest radiograph, which cardiac chamber constitutes the majority of the right border of the cardiac silhouette?",
+    "subjectSlug": "anatomy",
+    "topicSlug": "anatomy-radiological-anatomy",
+    "examRelevance": 8,
+    "difficulty": "easy",
+    "questionType": "SINGLE_BEST_ANSWER",
+    "provenance": "ORIGINAL",
+    "exam": "NEET_PG_INI_CET",
+    "options": [
+      {
+        "text": "Left ventricle",
+        "isCorrect": false
+      },
+      {
+        "text": "Right ventricle",
+        "isCorrect": false
+      },
+      {
+        "text": "Superior vena cava",
+        "isCorrect": false
+      },
+      {
+        "text": "Right atrium",
+        "isCorrect": true
+      }
+    ],
+    "explanation": "The right border of the heart on a PA chest X-ray is formed almost entirely by the right atrium. The right ventricle sits anteriorly."
+  },
+  {
+    "importId": "ANDE-M16-ANAT-052",
+    "stem": "A non-contrast head CT reveals a high-density collection of blood due to a torn middle meningeal artery. What characteristic shape identifies this epidural hematoma?",
+    "subjectSlug": "anatomy",
+    "topicSlug": "anatomy-radiological-anatomy",
+    "examRelevance": 8,
+    "difficulty": "medium",
+    "questionType": "SINGLE_BEST_ANSWER",
+    "provenance": "ORIGINAL",
+    "exam": "NEET_PG_INI_CET",
+    "options": [
+      {
+        "text": "Biconvex (lentiform)",
+        "isCorrect": true
+      },
+      {
+        "text": "Crescent-shaped (concave)",
+        "isCorrect": false
+      },
+      {
+        "text": "Ring-enhancing lesion",
+        "isCorrect": false
+      },
+      {
+        "text": "Diffuse hyperdensity in the basal cisterns",
+        "isCorrect": false
+      }
+    ],
+    "explanation": "Epidural hematomas are constrained by dural attachments at cranial sutures, causing them to bulge inward and appear biconvex (lens-shaped) on CT."
+  },
+  {
+    "importId": "ANDE-M16-ANAT-053",
+    "stem": "During hysterosalpingography, normal patency of the fallopian tubes is radiologically confirmed by observing contrast spilling into which space?",
+    "subjectSlug": "anatomy",
+    "topicSlug": "anatomy-radiological-anatomy",
+    "examRelevance": 8,
+    "difficulty": "medium",
+    "questionType": "SINGLE_BEST_ANSWER",
+    "provenance": "ORIGINAL",
+    "exam": "NEET_PG_INI_CET",
+    "options": [
+      {
+        "text": "Peritoneal cavity",
+        "isCorrect": true
+      },
+      {
+        "text": "Uterine cavity",
+        "isCorrect": false
+      },
+      {
+        "text": "Vagina",
+        "isCorrect": false
+      },
+      {
+        "text": "Broad ligament",
+        "isCorrect": false
+      }
+    ],
+    "explanation": "Contrast injected into the uterus flows through patent fallopian tubes and spills directly into the peritoneal cavity, confirming they are not blocked."
+  },
+  {
+    "importId": "ANDE-M16-ANAT-054",
+    "stem": "On a T2-weighted sagittal MRI of the normal adult lumbar spine, the cerebrospinal fluid (CSF) within the thecal sac typically appears:",
+    "subjectSlug": "anatomy",
+    "topicSlug": "anatomy-radiological-anatomy",
+    "examRelevance": 8,
+    "difficulty": "hard",
+    "questionType": "SINGLE_BEST_ANSWER",
+    "provenance": "ORIGINAL",
+    "exam": "NEET_PG_INI_CET",
+    "options": [
+      {
+        "text": "Isointense to muscle",
+        "isCorrect": false
+      },
+      {
+        "text": "Isointense to cortical bone",
+        "isCorrect": false
+      },
+      {
+        "text": "Hyperintense (bright)",
+        "isCorrect": true
+      },
+      {
+        "text": "Hypointense (dark)",
+        "isCorrect": false
+      }
+    ],
+    "explanation": "On T2-weighted MRI sequences, water and fluids appear bright (hyperintense). Thus, normal CSF is brilliantly hyperintense."
+  },
+  {
+    "importId": "ANDE-M16-ANAT-055",
+    "stem": "On cerebral angiography, a saccular aneurysm at the junction of the internal carotid artery and posterior communicating artery is most likely to compress which nerve?",
+    "subjectSlug": "anatomy",
+    "topicSlug": "anatomy-radiological-anatomy",
+    "examRelevance": 8,
+    "difficulty": "hard",
+    "questionType": "SINGLE_BEST_ANSWER",
+    "provenance": "ORIGINAL",
+    "exam": "NEET_PG_INI_CET",
+    "options": [
+      {
+        "text": "Oculomotor nerve (CN III)",
+        "isCorrect": true
+      },
+      {
+        "text": "Abducens nerve (CN VI)",
+        "isCorrect": false
+      },
+      {
+        "text": "Optic nerve (CN II)",
+        "isCorrect": false
+      },
+      {
+        "text": "Trochlear nerve (CN IV)",
+        "isCorrect": false
+      }
+    ],
+    "explanation": "A posterior communicating artery (PCoA) aneurysm classically compresses the adjacent oculomotor nerve (CN III), causing a down-and-out eye with pupillary dilation."
+  },
+  {
+    "importId": "ANDE-M16-ANAT-056",
+    "stem": "Tuffier's line, an imaginary horizontal line between the highest points of the iliac crests, typically intersects the vertebral column at which level?",
+    "subjectSlug": "anatomy",
+    "topicSlug": "anatomy-surface-anatomy",
+    "examRelevance": 8,
+    "difficulty": "easy",
+    "questionType": "SINGLE_BEST_ANSWER",
+    "provenance": "ORIGINAL",
+    "exam": "NEET_PG_INI_CET",
+    "options": [
+      {
+        "text": "L3 spinous process",
+        "isCorrect": false
+      },
+      {
+        "text": "L2 spinous process",
+        "isCorrect": false
+      },
+      {
+        "text": "L4 spinous process",
+        "isCorrect": true
+      },
+      {
+        "text": "S1 spinous process",
+        "isCorrect": false
+      }
+    ],
+    "explanation": "Tuffier's line reliably intersects the L4 spinous process or the L4-L5 interspace, making it the standard surface landmark for safely performing a lumbar puncture."
+  },
+  {
+    "importId": "ANDE-M16-ANAT-057",
+    "stem": "McBurney's point is located at the junction of the lateral one-third and medial two-thirds of a line connecting the umbilicus to which bony prominence?",
+    "subjectSlug": "anatomy",
+    "topicSlug": "anatomy-surface-anatomy",
+    "examRelevance": 8,
+    "difficulty": "medium",
+    "questionType": "SINGLE_BEST_ANSWER",
+    "provenance": "ORIGINAL",
+    "exam": "NEET_PG_INI_CET",
+    "options": [
+      {
+        "text": "Ischial spine",
+        "isCorrect": false
+      },
+      {
+        "text": "Anterior superior iliac spine",
+        "isCorrect": true
+      },
+      {
+        "text": "Anterior inferior iliac spine",
+        "isCorrect": false
+      },
+      {
+        "text": "Pubic tubercle",
+        "isCorrect": false
+      }
+    ],
+    "explanation": "McBurney's point is a surface marking for the base of the appendix, located one-third of the way from the right ASIS to the umbilicus."
+  },
+  {
+    "importId": "ANDE-M16-ANAT-058",
+    "stem": "The pulse of the dorsalis pedis artery is typically palpated on the dorsum of the foot just lateral to the prominent tendon of which muscle?",
+    "subjectSlug": "anatomy",
+    "topicSlug": "anatomy-surface-anatomy",
+    "examRelevance": 8,
+    "difficulty": "medium",
+    "questionType": "SINGLE_BEST_ANSWER",
+    "provenance": "ORIGINAL",
+    "exam": "NEET_PG_INI_CET",
+    "options": [
+      {
+        "text": "Peroneus tertius",
+        "isCorrect": false
+      },
+      {
+        "text": "Extensor digitorum longus",
+        "isCorrect": false
+      },
+      {
+        "text": "Tibialis anterior",
+        "isCorrect": false
+      },
+      {
+        "text": "Extensor hallucis longus",
+        "isCorrect": true
+      }
+    ],
+    "explanation": "The dorsalis pedis pulse is easily felt against the tarsal bones just lateral to the tendon of the extensor hallucis longus muscle."
+  },
+  {
+    "importId": "ANDE-M16-ANAT-059",
+    "stem": "In the midclavicular line, the inferior margin of the normal lung extends to which rib level during quiet respiration?",
+    "subjectSlug": "anatomy",
+    "topicSlug": "anatomy-surface-anatomy",
+    "examRelevance": 8,
+    "difficulty": "hard",
+    "questionType": "SINGLE_BEST_ANSWER",
+    "provenance": "ORIGINAL",
+    "exam": "NEET_PG_INI_CET",
+    "options": [
+      {
+        "text": "8th rib",
+        "isCorrect": false
+      },
+      {
+        "text": "4th rib",
+        "isCorrect": false
+      },
+      {
+        "text": "6th rib",
+        "isCorrect": true
+      },
+      {
+        "text": "10th rib",
+        "isCorrect": false
+      }
+    ],
+    "explanation": "During quiet respiration, the lung crosses the 6th rib in the midclavicular line, 8th in midaxillary, and 10th posteriorly. The pleura extends two ribs further down."
+  },
+  {
+    "importId": "ANDE-M16-ANAT-060",
+    "stem": "To optimally auscultate the closure of the aortic valve, the stethoscope should be placed at which of the following surface locations?",
+    "subjectSlug": "anatomy",
+    "topicSlug": "anatomy-surface-anatomy",
+    "examRelevance": 8,
+    "difficulty": "hard",
+    "questionType": "SINGLE_BEST_ANSWER",
+    "provenance": "ORIGINAL",
+    "exam": "NEET_PG_INI_CET",
+    "options": [
+      {
+        "text": "Left fifth intercostal space at the midclavicular line",
+        "isCorrect": false
+      },
+      {
+        "text": "Right second intercostal space at the sternal border",
+        "isCorrect": true
+      },
+      {
+        "text": "Lower left sternal border at the fourth intercostal space",
+        "isCorrect": false
+      },
+      {
+        "text": "Left second intercostal space at the sternal border",
+        "isCorrect": false
+      }
+    ],
+    "explanation": "Sound from the aortic valve radiates along the ascending aorta. The optimal auscultation site is the right 2nd intercostal space near the sternum."
+  },
+  {
+    "importId": "ANDE-M16-ANAT-061",
+    "stem": "Carpal tunnel syndrome presents with tingling and numbness in the thumb, index, and middle fingers. It is caused by compression of which nerve?",
+    "subjectSlug": "anatomy",
+    "topicSlug": "anatomy-applied-anatomy",
+    "examRelevance": 8,
+    "difficulty": "easy",
+    "questionType": "SINGLE_BEST_ANSWER",
+    "provenance": "ORIGINAL",
+    "exam": "NEET_PG_INI_CET",
+    "options": [
+      {
+        "text": "Median nerve",
+        "isCorrect": true
+      },
+      {
+        "text": "Ulnar nerve",
+        "isCorrect": false
+      },
+      {
+        "text": "Radial nerve",
+        "isCorrect": false
+      },
+      {
+        "text": "Musculocutaneous nerve",
+        "isCorrect": false
+      }
+    ],
+    "explanation": "The median nerve travels through the carpal tunnel. Compression leads to sensory changes in the lateral 3.5 digits and thenar muscle atrophy."
+  },
+  {
+    "importId": "ANDE-M16-ANAT-062",
+    "stem": "Thoracic outlet syndrome frequently involves compression of the lower trunk of the brachial plexus and which associated blood vessel?",
+    "subjectSlug": "anatomy",
+    "topicSlug": "anatomy-applied-anatomy",
+    "examRelevance": 8,
+    "difficulty": "medium",
+    "questionType": "SINGLE_BEST_ANSWER",
+    "provenance": "ORIGINAL",
+    "exam": "NEET_PG_INI_CET",
+    "options": [
+      {
+        "text": "Brachiocephalic trunk",
+        "isCorrect": false
+      },
+      {
+        "text": "Internal jugular vein",
+        "isCorrect": false
+      },
+      {
+        "text": "Axillary artery",
+        "isCorrect": false
+      },
+      {
+        "text": "Subclavian artery",
+        "isCorrect": true
+      }
+    ],
+    "explanation": "The neurovascular bundle (lower trunk of brachial plexus and subclavian artery) passes over the first rib and can be compressed in the thoracic outlet."
+  },
+  {
+    "importId": "ANDE-M16-ANAT-063",
+    "stem": "A runner develops acute anterior compartment syndrome of the leg. Which nerve is most at risk of ischemic damage in this specific compartment?",
+    "subjectSlug": "anatomy",
+    "topicSlug": "anatomy-applied-anatomy",
+    "examRelevance": 8,
+    "difficulty": "medium",
+    "questionType": "SINGLE_BEST_ANSWER",
+    "provenance": "ORIGINAL",
+    "exam": "NEET_PG_INI_CET",
+    "options": [
+      {
+        "text": "Tibial nerve",
+        "isCorrect": false
+      },
+      {
+        "text": "Sural nerve",
+        "isCorrect": false
+      },
+      {
+        "text": "Superficial peroneal nerve",
+        "isCorrect": false
+      },
+      {
+        "text": "Deep peroneal nerve",
+        "isCorrect": true
+      }
+    ],
+    "explanation": "The anterior compartment of the leg contains the deep peroneal (fibular) nerve. Ischemia causes weakness in dorsiflexion and sensory loss in the first web space."
+  },
+  {
+    "importId": "ANDE-M16-ANAT-064",
+    "stem": "During central venous catheterization of the internal jugular vein, the needle is typically inserted at the apex of the triangle formed by the clavicle and the two heads of which muscle?",
+    "subjectSlug": "anatomy",
+    "topicSlug": "anatomy-applied-anatomy",
+    "examRelevance": 8,
+    "difficulty": "hard",
+    "questionType": "SINGLE_BEST_ANSWER",
+    "provenance": "ORIGINAL",
+    "exam": "NEET_PG_INI_CET",
+    "options": [
+      {
+        "text": "Sternocleidomastoid",
+        "isCorrect": true
+      },
+      {
+        "text": "Omohyoid",
+        "isCorrect": false
+      },
+      {
+        "text": "Scalenus anterior",
+        "isCorrect": false
+      },
+      {
+        "text": "Trapezius",
+        "isCorrect": false
+      }
+    ],
+    "explanation": "Seddon's triangle is bounded by the sternal and clavicular heads of the sternocleidomastoid muscle and the clavicle. The IJV runs directly beneath the apex."
+  },
+  {
+    "importId": "ANDE-M16-ANAT-065",
+    "stem": "During an emergency surgical cricothyrotomy, the incision is made through the median cricothyroid ligament. This is located between which two cartilages?",
+    "subjectSlug": "anatomy",
+    "topicSlug": "anatomy-applied-anatomy",
+    "examRelevance": 8,
+    "difficulty": "hard",
+    "questionType": "SINGLE_BEST_ANSWER",
+    "provenance": "ORIGINAL",
+    "exam": "NEET_PG_INI_CET",
+    "options": [
+      {
+        "text": "Thyroid and cricoid cartilages",
+        "isCorrect": true
+      },
+      {
+        "text": "Arytenoid and cricoid cartilages",
+        "isCorrect": false
+      },
+      {
+        "text": "Cricoid cartilage and the first tracheal ring",
+        "isCorrect": false
+      },
+      {
+        "text": "Hyoid bone and thyroid cartilage",
+        "isCorrect": false
+      }
+    ],
+    "explanation": "The cricothyroid membrane connects the thyroid cartilage superiorly to the cricoid cartilage inferiorly, providing a rapid access point for emergency airways."
+  },
+  {
+    "importId": "ANDE-M16-ANAT-066",
+    "stem": "A stab wound to the lateral chest wall causes the medial border of the right scapula to protrude ('winging of the scapula'). Which nerve is injured?",
+    "subjectSlug": "anatomy",
+    "topicSlug": "anatomy-upper-limb",
+    "examRelevance": 8,
+    "difficulty": "easy",
+    "questionType": "SINGLE_BEST_ANSWER",
+    "provenance": "ORIGINAL",
+    "exam": "NEET_PG_INI_CET",
+    "options": [
+      {
+        "text": "Thoracodorsal nerve",
+        "isCorrect": false
+      },
+      {
+        "text": "Suprascapular nerve",
+        "isCorrect": false
+      },
+      {
+        "text": "Dorsal scapular nerve",
+        "isCorrect": false
+      },
+      {
+        "text": "Long thoracic nerve",
+        "isCorrect": true
+      }
+    ],
+    "explanation": "The long thoracic nerve innervates the serratus anterior. Injury paralyzes the muscle, preventing it from holding the scapula flat against the thoracic wall."
+  },
+  {
+    "importId": "ANDE-M16-ANAT-067",
+    "stem": "A patient sustains a mid-shaft fracture of the humerus and subsequently cannot extend the wrist and fingers (wrist drop). Which nerve is compromised?",
+    "subjectSlug": "anatomy",
+    "topicSlug": "anatomy-upper-limb",
+    "examRelevance": 8,
+    "difficulty": "medium",
+    "questionType": "SINGLE_BEST_ANSWER",
+    "provenance": "ORIGINAL",
+    "exam": "NEET_PG_INI_CET",
+    "options": [
+      {
+        "text": "Ulnar nerve",
+        "isCorrect": false
+      },
+      {
+        "text": "Median nerve",
+        "isCorrect": false
+      },
+      {
+        "text": "Radial nerve",
+        "isCorrect": true
+      },
+      {
+        "text": "Axillary nerve",
+        "isCorrect": false
+      }
+    ],
+    "explanation": "The radial nerve spirals tightly around the posterior aspect of the humeral mid-shaft in the radial groove, making it highly vulnerable to stretch or transection here."
+  },
+  {
+    "importId": "ANDE-M16-ANAT-068",
+    "stem": "A baby delivered after shoulder dystocia presents with a 'waiter's tip' posture (arm internally rotated, forearm pronated). This indicates injury to which brachial plexus roots?",
+    "subjectSlug": "anatomy",
+    "topicSlug": "anatomy-upper-limb",
+    "examRelevance": 8,
+    "difficulty": "medium",
+    "questionType": "SINGLE_BEST_ANSWER",
+    "provenance": "ORIGINAL",
+    "exam": "NEET_PG_INI_CET",
+    "options": [
+      {
+        "text": "Inferior trunk (C8, T1)",
+        "isCorrect": false
+      },
+      {
+        "text": "Superior trunk (C5, C6)",
+        "isCorrect": true
+      },
+      {
+        "text": "Middle trunk (C7)",
+        "isCorrect": false
+      },
+      {
+        "text": "Posterior cord",
+        "isCorrect": false
+      }
+    ],
+    "explanation": "Erb's palsy is an upper brachial plexus injury (C5-C6) typically caused by excessive lateral traction on the neck during birth, paralyzing shoulder abductors and external rotators."
+  },
+  {
+    "importId": "ANDE-M16-ANAT-069",
+    "stem": "Klumpke's palsy, often caused by grabbing a branch while falling, presents with a 'claw hand' deformity. This stretch injury affects which portion of the brachial plexus?",
+    "subjectSlug": "anatomy",
+    "topicSlug": "anatomy-upper-limb",
+    "examRelevance": 8,
+    "difficulty": "hard",
+    "questionType": "SINGLE_BEST_ANSWER",
+    "provenance": "ORIGINAL",
+    "exam": "NEET_PG_INI_CET",
+    "options": [
+      {
+        "text": "Inferior trunk (C8, T1)",
+        "isCorrect": true
+      },
+      {
+        "text": "Superior trunk (C5, C6)",
+        "isCorrect": false
+      },
+      {
+        "text": "Lateral cord",
+        "isCorrect": false
+      },
+      {
+        "text": "Axillary nerve",
+        "isCorrect": false
+      }
+    ],
+    "explanation": "Klumpke's palsy is a lower trunk (C8-T1) injury. It denervates the intrinsic hand muscles, leading to a prominent claw hand due to unopposed long flexors and extensors."
+  },
+  {
+    "importId": "ANDE-M16-ANAT-070",
+    "stem": "An avid cyclist complains of numbness in his ring and little fingers, and weakness in gripping. The physician suspects entrapment of which nerve within Guyon's canal?",
+    "subjectSlug": "anatomy",
+    "topicSlug": "anatomy-upper-limb",
+    "examRelevance": 8,
+    "difficulty": "hard",
+    "questionType": "SINGLE_BEST_ANSWER",
+    "provenance": "ORIGINAL",
+    "exam": "NEET_PG_INI_CET",
+    "options": [
+      {
+        "text": "Ulnar nerve",
+        "isCorrect": true
+      },
+      {
+        "text": "Anterior interosseous nerve",
+        "isCorrect": false
+      },
+      {
+        "text": "Median nerve",
+        "isCorrect": false
+      },
+      {
+        "text": "Radial nerve",
+        "isCorrect": false
+      }
+    ],
+    "explanation": "The ulnar nerve passes through Guyon's canal at the wrist. Prolonged pressure, such as resting on bicycle handlebars, can compress it, causing 'cyclist's palsy'."
+  }
+]

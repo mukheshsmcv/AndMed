@@ -1,0 +1,19 @@
+[
+  {
+    "importId": "Q-TEST-E2E-001",
+    "exam": "NEET-PG",
+    "subjectSlug": "anatomy",
+    "topicSlug": "anatomy-general-anatomy",
+    "stem": "TEST E2E DATA: Which of the following is true regarding E2E lifecycle?",
+    "options": [
+      { "text": "This is a test option A", "isCorrect": true, "whyWrong": null },
+      { "text": "This is a test option B", "isCorrect": false, "whyWrong": "Incorrect test option" }
+    ],
+    "explanation": "Test explanation.",
+    "difficulty": "medium",
+    "examRelevance": 5,
+    "clinicalClassification": "preclinical",
+    "provenance": "ORIGINAL",
+    "version": 1
+  }
+]
