@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, ScrollView, ActivityIndicator, TouchableOpacity } from 'react-native';
+import { View, Text, ScrollView, ActivityIndicator, TouchableOpacity, AppState } from 'react-native';
 import { supabase } from '../../lib/supabase';
 import { router } from 'expo-router';
 import { getApiOrigin } from '../../lib/api-url';
@@ -16,11 +16,24 @@ export default function Home() {
   const [missionData, setMissionData] = useState<any>(null);
   const [curriculumData, setCurriculumData] = useState<any>(null);
   const [revisionStats, setRevisionStats] = useState<any>(null);
+  const [activeRevisions, setActiveRevisions] = useState<any>(null);
+  const [studyStats, setStudyStats] = useState<any>(null);
   const [metadata, setMetadata] = useState<any>({});
   const [error, setError] = useState<string | null>(null);
+  const [currentDate, setCurrentDate] = useState(new Date());
 
   useEffect(() => {
     loadDashboard();
+    
+    const subscription = AppState.addEventListener('change', nextAppState => {
+      if (nextAppState === 'active') {
+        setCurrentDate(new Date());
+      }
+    });
+
+    return () => {
+      subscription.remove();
+    };
   }, []);
 
   const loadDashboard = async () => {
@@ -53,6 +66,8 @@ export default function Home() {
       setMissionData(missData);
       setCurriculumData(currData.curriculum || []);
       setRevisionStats(dashData.revisionStats || null);
+      setActiveRevisions(dashData.activeRevisions || []);
+      setStudyStats(dashData.studyStats || { todayStudySeconds: 0, currentStreak: 0 });
       setMetadata(session.user.user_metadata || {});
     } catch (err: any) {
       setError(err.message || 'Failed to load dashboard');
@@ -78,19 +93,31 @@ export default function Home() {
     );
   }
 
-  const isNewUser = performanceData?.totalQuestionsAttempted < 5;
-  const readinessValue = isNewUser ? 10 : (performanceData?.readinessScore || 0);
-
   const topSubjects = curriculumData?.slice(0, 4) || [];
   
   const currentExamId = metadata?.target_exam || CURRENT_EXAM_ID;
   const target = EXAM_TARGETS[currentExamId] || EXAM_TARGETS[CURRENT_EXAM_ID];
-  const countdown = getExamCountdown(target);
+  const countdown = getExamCountdown(target, currentDate);
 
-  const totalActionableRevision = (revisionStats?.overdueCount || 0) + (revisionStats?.dueTodayCount || 0);
-
-  const greeting = new Date().getHours() < 12 ? 'GOOD MORNING' : new Date().getHours() < 18 ? 'GOOD AFTERNOON' : 'GOOD EVENING';
+  const greeting = currentDate.getHours() < 12 ? 'GOOD MORNING' : currentDate.getHours() < 18 ? 'GOOD AFTERNOON' : 'GOOD EVENING';
   const userName = metadata?.name || metadata?.institution ? (metadata.name || 'DOC') : 'DOC';
+
+  const formatDuration = (seconds: number) => {
+    if (!seconds) return '0 min';
+    const h = Math.floor(seconds / 3600);
+    const m = Math.floor((seconds % 3600) / 60);
+    if (h > 0) return `${h}h ${m}m`;
+    return `${m} min`;
+  };
+
+  const dailyTargetHours = 6; // Configurable future goal
+  const dailyTargetSeconds = dailyTargetHours * 3600;
+  const todayProgress = Math.min(100, Math.round(((studyStats?.todayStudySeconds || 0) / dailyTargetSeconds) * 100));
+
+  let overallCompletedSubjects = 0;
+  if (curriculumData) {
+    overallCompletedSubjects = curriculumData.filter((s: any) => s.completionPercentage >= 100).length;
+  }
 
   return (
     <Screen noPadding>
@@ -103,81 +130,92 @@ export default function Home() {
         {/* Exam Target Header */}
         <ExamCountdown target={target} countdown={countdown} />
 
-        {/* Readiness Section */}
-        <SectionHeader title="Exam Readiness" />
-        <GlassCard style={{ alignItems: 'center', paddingVertical: SPACING.xl, marginBottom: SPACING.lg }}>
-          <ProgressRing progress={isNewUser ? 0 : readinessValue} size={140} strokeWidth={8} color={isNewUser ? theme.border : theme.accent}>
-            <Text style={{ color: theme.primaryText, fontSize: 48, fontWeight: '800', letterSpacing: -1 }}>
-              {readinessValue}
-            </Text>
-          </ProgressRing>
-          <Text style={{ color: theme.primaryText, fontSize: 16, fontWeight: '600', marginTop: SPACING.md }}>
-            {isNewUser ? 'Baseline establishing' : 'Internal readiness metric'}
-          </Text>
-          <Text style={{ color: theme.secondaryText, fontSize: 14, marginTop: 4, textAlign: 'center' }}>
-            {isNewUser ? 'Complete your first mission to establish your baseline.' : 'Based on mastery, accuracy, and practice.'}
-          </Text>
-        </GlassCard>
-
-        {/* Today's Mission */}
-        <SectionHeader title="Today's Mission" />
-        <GlassCard style={{ padding: SPACING.lg, backgroundColor: themeType === 'colorful' ? theme.learning : theme.surface }}>
-          <Text style={{ color: themeType === 'colorful' ? '#FFF' : theme.primaryText, fontSize: 22, fontWeight: '700', marginBottom: 2 }}>
-            {missionData?.nextAction?.title || 'Build your baseline'}
-          </Text>
-          <Text style={{ color: themeType === 'colorful' ? 'rgba(255,255,255,0.8)' : theme.secondaryText, fontSize: 15, marginBottom: SPACING.md }}>
-            {missionData?.progress?.completedCount || 0} / {missionData?.target?.dailyQuestionTarget || 25} questions • ~15 min
-          </Text>
-          <PrimaryButton 
-            title={missionData?.nextAction?.actionType === 'COMPLETE' ? 'CONTINUE ANYWAY' : 'START MISSION'} 
-            onPress={() => router.push('/mcq')} 
-          />
-        </GlassCard>
-
-        {/* Continue Studying (Simulated best-guess from recent activity, as there isn't a direct API for last studied topic yet) */}
-        {topSubjects.length > 0 && topSubjects[0].topics && topSubjects[0].topics.length > 0 && (
-          <>
-            <SectionHeader title="Continue Studying" />
-            <GlassCard style={{ padding: SPACING.md, flexDirection: 'row', alignItems: 'center' }}>
-              <View style={{ flex: 1 }}>
-                <Text style={{ color: theme.tertiaryText, fontSize: 13, textTransform: 'uppercase', fontWeight: '600', marginBottom: 2 }}>{topSubjects[0].name}</Text>
-                <Text style={{ color: theme.primaryText, fontSize: 18, fontWeight: '700' }}>{topSubjects[0].topics[0].name}</Text>
-                <Text style={{ color: theme.secondaryText, fontSize: 14, marginTop: 2 }}>{topSubjects[0].topics[0].masteryScore}% mastery</Text>
-              </View>
-              <TouchableOpacity onPress={() => router.push('/(tabs)/curriculum')} style={{ paddingHorizontal: SPACING.md, paddingVertical: SPACING.sm, backgroundColor: theme.surfaceHighlight, borderRadius: RADIUS.full }}>
-                <Text style={{ color: theme.accent, fontWeight: '600' }}>Continue</Text>
-              </TouchableOpacity>
-            </GlassCard>
-          </>
+        {/* Study Focus / Continue Studying */}
+        <SectionHeader title="Today's Focus" />
+        {studyStats?.recentTopicDetails ? (
+          <GlassCard style={{ padding: SPACING.md, flexDirection: 'row', alignItems: 'center', backgroundColor: themeType === 'colorful' ? theme.learning : theme.surface }}>
+            <View style={{ flex: 1 }}>
+              <Text style={{ color: themeType === 'colorful' ? 'rgba(255,255,255,0.8)' : theme.tertiaryText, fontSize: 13, textTransform: 'uppercase', fontWeight: '600', marginBottom: 2 }}>{studyStats.recentTopicDetails.subjectName}</Text>
+              <Text style={{ color: themeType === 'colorful' ? '#FFF' : theme.primaryText, fontSize: 18, fontWeight: '700' }}>{studyStats.recentTopicDetails.name}</Text>
+              <Text style={{ color: themeType === 'colorful' ? 'rgba(255,255,255,0.9)' : theme.secondaryText, fontSize: 14, marginTop: 4 }}>
+                Continue studying
+              </Text>
+            </View>
+            <TouchableOpacity onPress={() => router.push(`/topic/${studyStats.recentTopicDetails.id}` as any)} style={{ paddingHorizontal: SPACING.md, paddingVertical: SPACING.sm, backgroundColor: themeType === 'colorful' ? 'rgba(255,255,255,0.2)' : theme.surfaceHighlight, borderRadius: RADIUS.full }}>
+              <Text style={{ color: themeType === 'colorful' ? '#FFF' : theme.accent, fontWeight: '600' }}>Continue</Text>
+            </TouchableOpacity>
+          </GlassCard>
+        ) : topSubjects.length > 0 && topSubjects[0].topics && topSubjects[0].topics.length > 0 ? (
+          <GlassCard style={{ padding: SPACING.md, flexDirection: 'row', alignItems: 'center', backgroundColor: themeType === 'colorful' ? theme.learning : theme.surface }}>
+            <View style={{ flex: 1 }}>
+              <Text style={{ color: themeType === 'colorful' ? 'rgba(255,255,255,0.8)' : theme.tertiaryText, fontSize: 13, textTransform: 'uppercase', fontWeight: '600', marginBottom: 2 }}>{topSubjects[0].name}</Text>
+              <Text style={{ color: themeType === 'colorful' ? '#FFF' : theme.primaryText, fontSize: 18, fontWeight: '700' }}>{topSubjects[0].topics[0].name}</Text>
+              <Text style={{ color: themeType === 'colorful' ? 'rgba(255,255,255,0.9)' : theme.secondaryText, fontSize: 14, marginTop: 4 }}>
+                Start new topic
+              </Text>
+            </View>
+            <TouchableOpacity onPress={() => router.push(`/topic/${topSubjects[0].topics[0].id}` as any)} style={{ paddingHorizontal: SPACING.md, paddingVertical: SPACING.sm, backgroundColor: themeType === 'colorful' ? 'rgba(255,255,255,0.2)' : theme.surfaceHighlight, borderRadius: RADIUS.full }}>
+              <Text style={{ color: themeType === 'colorful' ? '#FFF' : theme.accent, fontWeight: '600' }}>Start</Text>
+            </TouchableOpacity>
+          </GlassCard>
+        ) : (
+          <GlassCard style={{ padding: SPACING.md }}>
+             <Text style={{ color: theme.secondaryText, textAlign: 'center' }}>No topics available. Check curriculum.</Text>
+          </GlassCard>
         )}
 
-        {/* Review Today */}
-        <SectionHeader title="Review Today" />
-        <GlassCard style={{ padding: SPACING.md, backgroundColor: themeType === 'colorful' ? theme.revision : theme.surface }}>
-          {totalActionableRevision > 0 ? (
-            <View>
-              <Text style={{ color: themeType === 'colorful' ? '#FFF' : theme.primaryText, fontSize: 18, fontWeight: '700', marginBottom: SPACING.sm }}>
-                {totalActionableRevision} topics due
-              </Text>
-              <TimelineItem title="Revision Session" subtitle={`${totalActionableRevision} items need your attention`} isToday={true} />
-              <TouchableOpacity onPress={() => router.push('/(tabs)/revision')} style={{ marginTop: SPACING.sm }}>
-                <Text style={{ color: themeType === 'colorful' ? '#FFF' : theme.accent, fontWeight: '600', fontSize: 15 }}>Start Revision →</Text>
-              </TouchableOpacity>
+        {/* Today's Revision */}
+        <SectionHeader title="Today's Revision" />
+        {activeRevisions && activeRevisions.length > 0 ? (
+          <View style={{ gap: SPACING.sm }}>
+            {activeRevisions.slice(0, 3).map((rev: any) => (
+              <GlassCard key={rev.id} style={{ padding: SPACING.md, flexDirection: 'row', alignItems: 'center' }}>
+                <View style={{ flex: 1 }}>
+                  <Text style={{ color: theme.tertiaryText, fontSize: 11, textTransform: 'uppercase', fontWeight: '600', marginBottom: 2 }}>
+                    {rev.subjectName}
+                  </Text>
+                  <Text style={{ color: theme.primaryText, fontSize: 16, fontWeight: '600' }}>{rev.topicName}</Text>
+                  <Text style={{ color: rev.status === 'OVERDUE' ? '#EF4444' : theme.accent, fontSize: 13, marginTop: 4, fontWeight: '500' }}>
+                    {rev.status === 'OVERDUE' ? 'Overdue' : 'Due today'}
+                  </Text>
+                </View>
+                <TouchableOpacity onPress={() => router.push(`/topic/${rev.topicId}` as any)} style={{ paddingHorizontal: SPACING.md, paddingVertical: SPACING.sm, backgroundColor: theme.surfaceHighlight, borderRadius: RADIUS.full }}>
+                  <Text style={{ color: theme.primaryText, fontWeight: '600', fontSize: 13 }}>Review Topic</Text>
+                </TouchableOpacity>
+              </GlassCard>
+            ))}
+          </View>
+        ) : (
+          <GlassCard style={{ padding: SPACING.md }}>
+            <Text style={{ color: theme.secondaryText, textAlign: 'center' }}>No revisions due today</Text>
+          </GlassCard>
+        )}
+
+        {/* Study Stats Today & Streak */}
+        <View style={{ flexDirection: 'row', gap: SPACING.md, marginTop: SPACING.xl }}>
+          <GlassCard style={{ flex: 1, padding: SPACING.md }}>
+            <Text style={{ color: theme.secondaryText, fontSize: 13, fontWeight: '600', marginBottom: SPACING.xs, textTransform: 'uppercase' }}>Study Today</Text>
+            <Text style={{ color: theme.primaryText, fontSize: 24, fontWeight: '800', letterSpacing: -0.5 }}>{formatDuration(studyStats?.todayStudySeconds)}</Text>
+            <View style={{ flexDirection: 'row', alignItems: 'center', marginTop: SPACING.sm, marginBottom: 4 }}>
+              <Text style={{ color: theme.tertiaryText, fontSize: 12, marginRight: SPACING.sm }}>Target: {dailyTargetHours}h</Text>
             </View>
-          ) : (
-            <View>
-              <Text style={{ color: themeType === 'colorful' ? '#FFF' : theme.primaryText, fontSize: 18, fontWeight: '700', marginBottom: 4 }}>
-                You're clear for today.
-              </Text>
-              <Text style={{ color: themeType === 'colorful' ? 'rgba(255,255,255,0.8)' : theme.secondaryText, fontSize: 14 }}>
-                Next review: {revisionStats?.upcomingCount > 0 ? 'Tomorrow' : 'None scheduled'}
-              </Text>
+            <ProgressBar progress={todayProgress} height={4} />
+          </GlassCard>
+          
+          <GlassCard style={{ flex: 1, padding: SPACING.md, justifyContent: 'center' }}>
+            <Text style={{ color: theme.secondaryText, fontSize: 13, fontWeight: '600', marginBottom: SPACING.xs, textTransform: 'uppercase' }}>Current Streak</Text>
+            <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+              <Text style={{ fontSize: 24, marginRight: 6 }}>🔥</Text>
+              <Text style={{ color: theme.primaryText, fontSize: 24, fontWeight: '800', letterSpacing: -0.5 }}>{studyStats?.currentStreak || 0} days</Text>
             </View>
-          )}
-        </GlassCard>
+          </GlassCard>
+        </View>
 
         {/* Subjects Preview */}
         <SectionHeader title="Curriculum Progress" actionTitle="View all" onAction={() => router.push('/(tabs)/curriculum')} />
+        <Text style={{ color: theme.secondaryText, fontSize: 14, marginBottom: SPACING.sm }}>
+          {overallCompletedSubjects} / {curriculumData?.length || 19} subjects completed
+        </Text>
         <View style={{ flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'space-between', marginHorizontal: -SPACING.xs }}>
           {topSubjects.length > 0 ? topSubjects.map((sub: any) => {
             let cardColor = theme.surface;
@@ -211,30 +249,17 @@ export default function Home() {
           <GlassCard style={{ flexDirection: 'row', alignItems: 'center', padding: SPACING.md, backgroundColor: themeType === 'colorful' ? theme.critical : theme.surface }}>
             <View style={{ flex: 1 }}>
               <Text style={{ color: themeType === 'colorful' ? '#FFF' : theme.primaryText, fontSize: 18, fontWeight: '700' }}>{performanceData.recommendedFocus.name}</Text>
-              <Text style={{ color: themeType === 'colorful' ? 'rgba(255,255,255,0.8)' : theme.secondaryText, fontSize: 14, marginTop: 2 }}>Critical weakness in {performanceData.recommendedFocus.subjectName}</Text>
+              <Text style={{ color: themeType === 'colorful' ? 'rgba(255,255,255,0.8)' : theme.secondaryText, fontSize: 14, marginTop: 2 }}>{performanceData.recommendedFocus.subjectName}</Text>
             </View>
-            <TouchableOpacity onPress={() => router.push('/mcq')} style={{ paddingHorizontal: SPACING.md, paddingVertical: SPACING.sm, backgroundColor: themeType === 'colorful' ? 'rgba(255,255,255,0.2)' : theme.surfaceHighlight, borderRadius: RADIUS.full }}>
-              <Text style={{ color: themeType === 'colorful' ? '#FFF' : theme.accent, fontWeight: '600' }}>Practice</Text>
+            <TouchableOpacity onPress={() => router.push(`/topic/${performanceData.recommendedFocus.id}` as any)} style={{ paddingHorizontal: SPACING.md, paddingVertical: SPACING.sm, backgroundColor: themeType === 'colorful' ? 'rgba(255,255,255,0.2)' : theme.surfaceHighlight, borderRadius: RADIUS.full }}>
+              <Text style={{ color: themeType === 'colorful' ? '#FFF' : theme.accent, fontWeight: '600' }}>Study</Text>
             </TouchableOpacity>
           </GlassCard>
         ) : (
           <GlassCard style={{ padding: SPACING.md }}>
-            <Text style={{ color: theme.secondaryText, textAlign: 'center' }}>Complete more questions to identify your weak areas.</Text>
+            <Text style={{ color: theme.secondaryText, textAlign: 'center' }}>No immediate topics require attention.</Text>
           </GlassCard>
         )}
-
-        {/* Recent Performance Summary */}
-        <SectionHeader title="Recent Performance" />
-        <View style={{ flexDirection: 'row', gap: SPACING.md }}>
-          <GlassCard style={{ flex: 1, padding: SPACING.md }}>
-            <Text style={{ color: theme.secondaryText, fontSize: 13, fontWeight: '600', marginBottom: SPACING.sm }}>Accuracy</Text>
-            <Text style={{ color: theme.primaryText, fontSize: 32, fontWeight: '800', letterSpacing: -1 }}>{performanceData?.overallAccuracy || 0}%</Text>
-          </GlassCard>
-          <GlassCard style={{ flex: 1, padding: SPACING.md }}>
-            <Text style={{ color: theme.secondaryText, fontSize: 13, fontWeight: '600', marginBottom: SPACING.sm }}>Questions</Text>
-            <Text style={{ color: theme.primaryText, fontSize: 32, fontWeight: '800', letterSpacing: -1 }}>{performanceData?.totalQuestionsAttempted || 0}</Text>
-          </GlassCard>
-        </View>
 
       </ScrollView>
     </Screen>

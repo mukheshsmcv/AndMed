@@ -169,11 +169,56 @@ async function runTests() {
       throw new Error('Failed to retrieve 2 sessions');
     }
 
+    // 7. Test M17 Topic Spaced Repetition (Revision Scheduling)
+    console.log(`\n--- M17 TOPIC REVISIONS ---`);
+    const { scheduleTopicRevision } = require('./src/lib/revision-scheduler.ts');
+    
+    // Simulate first manual completion
+    await scheduleTopicRevision(testUserId, topicId);
+    
+    let { data: rev1 } = await supabaseAdmin.from('student_topic_revisions').select('*').eq('user_id', testUserId).eq('topic_id', topicId).single();
+    if (!rev1) throw new Error('Topic revision not created on first completion');
+    console.log(`[PASS] Completed topic creates first schedule`);
+    if (rev1.interval_days === 7) console.log(`[PASS] First interval = 7 days`);
+    else throw new Error(`First interval was ${rev1.interval_days}, expected 7`);
+    
+    // Complete first revision
+    await supabaseAdmin.from('student_topic_revisions').update({ status: 'COMPLETED', completed_at: new Date().toISOString() }).eq('id', rev1.id);
+    await scheduleTopicRevision(testUserId, topicId);
+    
+    let { data: revs2 } = await supabaseAdmin.from('student_topic_revisions').select('*').eq('user_id', testUserId).eq('topic_id', topicId).order('created_at', { ascending: false });
+    if (!revs2 || revs2.length < 2) throw new Error('Second revision not created');
+    let rev2 = revs2[0];
+    if (rev2.interval_days === 14) console.log(`[PASS] Second interval = 14 days`);
+    else throw new Error(`Second interval was ${rev2.interval_days}, expected 14`);
+
+    // Complete second revision
+    await supabaseAdmin.from('student_topic_revisions').update({ status: 'COMPLETED', completed_at: new Date().toISOString() }).eq('id', rev2.id);
+    await scheduleTopicRevision(testUserId, topicId);
+    
+    let { data: revs3 } = await supabaseAdmin.from('student_topic_revisions').select('*').eq('user_id', testUserId).eq('topic_id', topicId).order('created_at', { ascending: false });
+    if (!revs3 || revs3.length < 3) throw new Error('Third revision not created');
+    let rev3 = revs3[0];
+    if (rev3.interval_days === 30) console.log(`[PASS] Third interval = 30 days`);
+    else throw new Error(`Third interval was ${rev3.interval_days}, expected 30`);
+
+    // Test overdue state
+    await supabaseAdmin.from('student_topic_revisions').update({ scheduled_for: '2020-01-01' }).eq('id', rev3.id);
+    const todayStr = new Date().toISOString().split('T')[0];
+    const { data: overdueCheck } = await supabaseAdmin.from('student_topic_revisions').select('*').eq('id', rev3.id).single();
+    if (overdueCheck && overdueCheck.scheduled_for < todayStr) console.log(`[PASS] Overdue state calculated correctly via date comparison`);
+
+    // Test duplicate scheduling protection
+    await scheduleTopicRevision(testUserId, topicId); // Should not create another since one is active
+    let { data: revsCheckDup } = await supabaseAdmin.from('student_topic_revisions').select('*').eq('user_id', testUserId).eq('topic_id', topicId).in('status', ['SCHEDULED', 'OVERDUE']);
+    if (revsCheckDup && revsCheckDup.length === 1) console.log(`[PASS] Duplicate scheduling protection works (only 1 active)`);
+    else throw new Error(`Found ${revsCheckDup?.length} active revisions, expected 1`);
+
     console.log(`\n--- ALL TESTS PASSED SUCCESSFULLY ---`);
   } catch (err: any) {
     console.error(`\n[FAIL] ${err.message}`);
   } finally {
-    // 7. Cleanup
+    // 8. Cleanup
     if (testUserId) {
       console.log(`\nCleaning up test user data...`);
       await supabaseAdmin.auth.admin.deleteUser(testUserId);

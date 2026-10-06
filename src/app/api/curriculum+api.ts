@@ -103,6 +103,7 @@ export async function GET(req: Request) {
 
       const totalQCount = topicDetails.reduce((sum, t) => sum + t.questionCount, 0);
       const coveredTopics = topicDetails.filter(t => t.questionCount > 0).length;
+      const completedTopics = topicDetails.filter(t => t.status === 'COMPLETED' || t.status === 'MASTERED').length;
 
       const sEvidence = {
         questionsAttempted: sMastery?.questions_attempted || 0,
@@ -117,10 +118,11 @@ export async function GET(req: Request) {
         academicYear: subject.academic_year,
         topicCount: subjectTopics.length,
         coveredTopicCount: coveredTopics,
+        completedTopicCount: completedTopics,
         questionCount: totalQCount,
         coveragePercentage: subjectTopics.length > 0 ? Math.round((coveredTopics / subjectTopics.length) * 100) : 0,
         status: deriveCurriculumStatus(sEvidence),
-        completionPercentage: calculateCompletionPercentage(sEvidence.masteryScore, sEvidence.questionsAttempted),
+        completionPercentage: subjectTopics.length > 0 ? Math.round((completedTopics / subjectTopics.length) * 100) : 0,
         masteryScore: sEvidence.masteryScore,
         questionsAttempted: sEvidence.questionsAttempted,
         topics: topicDetails

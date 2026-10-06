@@ -28,39 +28,34 @@ export const EXAM_TARGETS: Record<string, ExamTarget> = {
 
 export const CURRENT_EXAM_ID = 'INI-CET_NOV_26';
 
-export function getExamCountdown(target: ExamTarget) {
-  if (target.exactDate) {
-    const targetDate = new Date(target.exactDate);
-    const now = new Date();
-    const diffTime = Math.abs(targetDate.getTime() - now.getTime());
-    const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+export function getExamCountdown(target: ExamTarget, referenceDate?: Date) {
+  const now = referenceDate || new Date();
+  
+  if (target.isOfficialDate && target.exactDate) {
+    const [y, m, d] = target.exactDate.split('-');
+    const targetDate = new Date(parseInt(y), parseInt(m) - 1, parseInt(d));
     
-    if (targetDate.getTime() < now.getTime()) {
-      return { type: 'past', label: 'Exam completed' };
+    // Normalize to UTC midnight to avoid local timezone and daylight savings anomalies
+    const utcNow = Date.UTC(now.getFullYear(), now.getMonth(), now.getDate());
+    const utcTarget = Date.UTC(targetDate.getFullYear(), targetDate.getMonth(), targetDate.getDate());
+    
+    const diffTime = utcTarget - utcNow;
+    const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
+    
+    if (diffDays < 0) {
+      return { type: 'past', days: diffDays, label: 'Exam Completed' };
     }
     
-    // We only want to count days in between today and exam day.
-    const daysInBetween = Math.max(0, diffDays - 1);
+    if (diffDays === 0) {
+      return { type: 'exact', days: 0, label: 'Exam Today' };
+    }
     
-    return { type: 'exact', days: daysInBetween, label: `${daysInBetween} DAYS` };
+    if (diffDays === 1) {
+      return { type: 'exact', days: 1, label: '1 day remaining' };
+    }
+    
+    return { type: 'exact', days: diffDays, label: `${diffDays} days remaining` };
   } else {
-    // Approximate mode
-    const [monthStr, yearStr] = target.targetMonth.split(' ');
-    const monthMap: Record<string, number> = {
-      'January': 0, 'February': 1, 'March': 2, 'April': 3, 'May': 4, 'June': 5,
-      'July': 6, 'August': 7, 'September': 8, 'October': 9, 'November': 10, 'December': 11
-    };
-    
-    const targetDate = new Date(parseInt(yearStr), monthMap[monthStr], 15); // middle of month
-    const now = new Date();
-    
-    if (targetDate.getTime() < now.getTime()) {
-      return { type: 'past', label: 'Exam period passed' };
-    }
-    
-    const diffMonths = (targetDate.getFullYear() - now.getFullYear()) * 12 + (targetDate.getMonth() - now.getMonth());
-    if (diffMonths <= 0) return { type: 'approximate', label: '< 1 month remaining' };
-    if (diffMonths === 1) return { type: 'approximate', label: '~1 month remaining' };
-    return { type: 'approximate', label: `~${diffMonths} months remaining` };
+    return { type: 'approximate', days: null, label: 'Exam date not finalized' };
   }
 }

@@ -333,3 +333,30 @@ CREATE POLICY "User read own topic sessions" ON student_topic_sessions FOR SELEC
 
 CREATE INDEX idx_student_topic_sessions_user_topic_start ON student_topic_sessions(user_id, topic_id, started_at);
 CREATE INDEX idx_student_topic_sessions_user_topic_status ON student_topic_sessions(user_id, topic_id, status);
+
+-- M17: Topic Spaced Repetition (Topic Revisions)
+CREATE TABLE student_topic_revisions (
+    id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+    user_id UUID NOT NULL REFERENCES auth.users(id) ON DELETE CASCADE,
+    topic_id UUID NOT NULL REFERENCES topics(id) ON DELETE CASCADE,
+    scheduled_for DATE NOT NULL,
+    completed_at TIMESTAMPTZ,
+    status TEXT NOT NULL CHECK (status IN ('SCHEDULED', 'COMPLETED', 'SKIPPED', 'OVERDUE')),
+    interval_days INTEGER NOT NULL,
+    created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
+    updated_at TIMESTAMPTZ NOT NULL DEFAULT now()
+);
+
+CREATE INDEX idx_student_topic_revisions_user_scheduled ON student_topic_revisions(user_id, scheduled_for);
+CREATE INDEX idx_student_topic_revisions_user_topic ON student_topic_revisions(user_id, topic_id);
+CREATE INDEX idx_student_topic_revisions_user_status_scheduled ON student_topic_revisions(user_id, status, scheduled_for);
+
+ALTER TABLE student_topic_revisions ENABLE ROW LEVEL SECURITY;
+
+CREATE POLICY "Users can view their own topic revisions"
+    ON student_topic_revisions FOR SELECT
+    USING (auth.uid() = user_id);
+
+CREATE POLICY "Service role can manage topic revisions"
+    ON student_topic_revisions FOR ALL
+    USING (auth.role() = 'service_role');

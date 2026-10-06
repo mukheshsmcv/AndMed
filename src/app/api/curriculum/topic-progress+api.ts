@@ -1,4 +1,5 @@
 import { supabaseServer } from '../../../lib/supabase-server';
+import { scheduleTopicRevision } from '../../../lib/revision-scheduler';
 
 export async function POST(req: Request) {
   try {
@@ -41,6 +42,10 @@ export async function POST(req: Request) {
 
     if (upsertError) {
       return Response.json({ error: upsertError.message }, { status: 500 });
+    }
+
+    if (manuallyCompleted) {
+      await scheduleTopicRevision(user.id, topicId);
     }
 
     return Response.json({ success: true, status });

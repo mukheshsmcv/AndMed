@@ -309,8 +309,8 @@ export default function Curriculum() {
                     
                     <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'flex-end', marginBottom: SPACING.sm }}>
                       <View>
-                        <Text style={{ color: theme.secondaryText, fontSize: 14 }}>{subStudied} / {subject.topicCount} topics studied</Text>
-                        <Text style={{ color: theme.tertiaryText, fontSize: 13, marginTop: 2 }}>{subject.completionPercentage}% mastery overall</Text>
+                        <Text style={{ color: theme.secondaryText, fontSize: 14 }}>{subject.completedTopicCount || 0} / {subject.topicCount} topics completed</Text>
+                        <Text style={{ color: theme.tertiaryText, fontSize: 13, marginTop: 2 }}>{subject.masteryScore}% mastery overall</Text>
                       </View>
                       <Text style={{ color: theme.primaryText, fontSize: 24, fontWeight: '700' }}>{subject.completionPercentage}%</Text>
                     </View>

@@ -219,7 +219,7 @@ export default function TopicDetail() {
           <TouchableOpacity 
             disabled={actionLoading}
             onPress={() => handleSessionAction(activeSession ? 'complete' : 'start')}
-            style={{ flex: 2, backgroundColor: activeSession ? theme.success : theme.accent, paddingVertical: 14, borderRadius: RADIUS.md, alignItems: 'center', opacity: actionLoading ? 0.7 : 1 }}
+            style={{ flex: 1, backgroundColor: activeSession ? theme.success : theme.accent, paddingVertical: 14, borderRadius: RADIUS.md, alignItems: 'center', opacity: actionLoading ? 0.7 : 1 }}
           >
             {actionLoading ? <ActivityIndicator color="#FFF" /> : (
               <Text style={{ color: '#FFF', fontSize: 16, fontWeight: '700' }}>
@@ -228,14 +228,17 @@ export default function TopicDetail() {
             )}
           </TouchableOpacity>
           <TouchableOpacity 
-            onPress={() => router.push('/mcq')}
-            style={{ flex: 1, backgroundColor: theme.surfaceHighlight, borderWidth: 1, borderColor: theme.border, paddingVertical: 14, borderRadius: RADIUS.md, alignItems: 'center' }}
+            disabled={actionLoading}
+            onPress={() => handleSessionAction(isCompleted ? 'abandon' : 'complete')}
+            style={{ flex: 1, backgroundColor: theme.surfaceHighlight, borderWidth: 1, borderColor: theme.border, paddingVertical: 14, borderRadius: RADIUS.md, alignItems: 'center', opacity: actionLoading ? 0.7 : 1 }}
           >
-            <Text style={{ color: theme.primaryText, fontSize: 16, fontWeight: '600' }}>Practice</Text>
+            <Text style={{ color: theme.primaryText, fontSize: 16, fontWeight: '600' }}>
+              {isCompleted ? 'Unmark Complete' : 'Mark Complete'}
+            </Text>
           </TouchableOpacity>
         </View>
 
-        {/* Summary Grid */}
+        {/* Summary Grid (Study Focus) */}
         <View style={{ flexDirection: 'row', flexWrap: 'wrap', marginHorizontal: -SPACING.xs, marginBottom: SPACING.lg }}>
           <View style={{ width: '50%', padding: SPACING.xs }}>
             <GlassCard style={{ padding: SPACING.md }}>
@@ -247,24 +250,6 @@ export default function TopicDetail() {
             <GlassCard style={{ padding: SPACING.md }}>
               <Text style={{ color: theme.secondaryText, fontSize: 12, textTransform: 'uppercase', fontWeight: '600', marginBottom: 4 }}>Total Time</Text>
               <Text style={{ color: theme.primaryText, fontSize: 24, fontWeight: '700' }}>{formatDuration(totalStudySeconds)}</Text>
-            </GlassCard>
-          </View>
-          <View style={{ width: '33.33%', padding: SPACING.xs }}>
-            <GlassCard style={{ padding: SPACING.md }}>
-              <Text style={{ color: theme.secondaryText, fontSize: 11, textTransform: 'uppercase', fontWeight: '600', marginBottom: 4 }}>Questions</Text>
-              <Text style={{ color: theme.primaryText, fontSize: 20, fontWeight: '700' }}>{mastery.questions_attempted}</Text>
-            </GlassCard>
-          </View>
-          <View style={{ width: '33.33%', padding: SPACING.xs }}>
-            <GlassCard style={{ padding: SPACING.md }}>
-              <Text style={{ color: theme.secondaryText, fontSize: 11, textTransform: 'uppercase', fontWeight: '600', marginBottom: 4 }}>Mastery</Text>
-              <Text style={{ color: theme.primaryText, fontSize: 20, fontWeight: '700' }}>{mastery.mastery_score}%</Text>
-            </GlassCard>
-          </View>
-          <View style={{ width: '33.33%', padding: SPACING.xs }}>
-            <GlassCard style={{ padding: SPACING.md }}>
-              <Text style={{ color: theme.secondaryText, fontSize: 11, textTransform: 'uppercase', fontWeight: '600', marginBottom: 4 }}>Revision</Text>
-              <Text style={{ color: theme.primaryText, fontSize: 20, fontWeight: '700' }}>{revisionCount}</Text>
             </GlassCard>
           </View>
         </View>
@@ -358,6 +343,33 @@ export default function TopicDetail() {
                 </View>
               );
             })}
+          </View>
+        )}
+
+        {/* Academic Data (Hidden if no evidence) */}
+        {mastery.questions_attempted > 0 && (
+          <View style={{ marginTop: SPACING.xl }}>
+            <Text style={{ color: theme.primaryText, fontSize: 16, fontWeight: '800', letterSpacing: -0.5, marginBottom: SPACING.md, textTransform: 'uppercase' }}>Academic Data</Text>
+            <GlassCard style={{ padding: SPACING.md }}>
+              <View style={{ flexDirection: 'row', justifyContent: 'space-between', paddingBottom: SPACING.sm, borderBottomWidth: 1, borderBottomColor: theme.border }}>
+                <Text style={{ color: theme.secondaryText, fontSize: 14 }}>Questions attempted</Text>
+                <Text style={{ color: theme.primaryText, fontSize: 14, fontWeight: '500' }}>{mastery.questions_attempted}</Text>
+              </View>
+              <View style={{ flexDirection: 'row', justifyContent: 'space-between', paddingVertical: SPACING.sm, borderBottomWidth: 1, borderBottomColor: theme.border }}>
+                <Text style={{ color: theme.secondaryText, fontSize: 14 }}>Accuracy</Text>
+                <Text style={{ color: theme.primaryText, fontSize: 14, fontWeight: '500' }}>
+                  {mastery.questions_attempted > 0 ? `${Math.round((mastery.correct_attempts / mastery.questions_attempted) * 100)}%` : '—'}
+                </Text>
+              </View>
+              <View style={{ flexDirection: 'row', justifyContent: 'space-between', paddingVertical: SPACING.sm, borderBottomWidth: 1, borderBottomColor: theme.border }}>
+                <Text style={{ color: theme.secondaryText, fontSize: 14 }}>Mastery</Text>
+                <Text style={{ color: theme.primaryText, fontSize: 14, fontWeight: '500' }}>{Math.round(mastery.mastery_score)}%</Text>
+              </View>
+              <View style={{ flexDirection: 'row', justifyContent: 'space-between', paddingTop: SPACING.sm }}>
+                <Text style={{ color: theme.secondaryText, fontSize: 14 }}>Revisions</Text>
+                <Text style={{ color: theme.primaryText, fontSize: 14, fontWeight: '500' }}>{revisionCount}</Text>
+              </View>
+            </GlassCard>
           </View>
         )}
 
