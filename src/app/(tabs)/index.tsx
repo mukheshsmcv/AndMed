@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import { View, Text, ScrollView, ActivityIndicator, TouchableOpacity, AppState } from 'react-native';
 import { supabase } from '../../lib/supabase';
-import { router } from 'expo-router';
+import { router, useFocusEffect } from 'expo-router';
 import { getApiOrigin } from '../../lib/api-url';
-import { Screen, SectionHeader, GlassCard, ProgressRing, ProgressBar, PrimaryButton, ExamCountdown, TimelineItem, SPACING, RADIUS } from '../../components/DesignSystem';
+import { Screen, SectionHeader, GlassCard, ProgressBar, PrimaryButton, ExamCountdown, SPACING, RADIUS } from '../../components/DesignSystem';
+import { SubjectProgressCard } from '../../components/SubjectProgressCard';
 import { Ionicons } from '@expo/vector-icons';
 import { EXAM_TARGETS, CURRENT_EXAM_ID, getExamCountdown } from '../../config/exam';
 import { useTheme } from '../../theme/ThemeProvider';
@@ -15,19 +16,28 @@ export default function Home() {
   const [performanceData, setPerformanceData] = useState<any>(null);
   const [missionData, setMissionData] = useState<any>(null);
   const [curriculumData, setCurriculumData] = useState<any>(null);
+  const [subjectProgress, setSubjectProgress] = useState<any[]>([]);
+  const [recentSubjects, setRecentSubjects] = useState<any[]>([]);
   const [revisionStats, setRevisionStats] = useState<any>(null);
-  const [activeRevisions, setActiveRevisions] = useState<any>(null);
+  const [activeRevisions, setActiveRevisions] = useState<any[]>([]);
   const [studyStats, setStudyStats] = useState<any>(null);
   const [metadata, setMetadata] = useState<any>({});
   const [error, setError] = useState<string | null>(null);
   const [currentDate, setCurrentDate] = useState(new Date());
 
+  // Focus effect to ensure live refresh when returning from Profile, Study sessions, etc.
+  useFocusEffect(
+    useCallback(() => {
+      loadDashboard();
+      setCurrentDate(new Date());
+    }, [])
+  );
+
   useEffect(() => {
-    loadDashboard();
-    
     const subscription = AppState.addEventListener('change', nextAppState => {
       if (nextAppState === 'active') {
         setCurrentDate(new Date());
+        loadDashboard();
       }
     });
 
@@ -38,12 +48,15 @@ export default function Home() {
 
   const loadDashboard = async () => {
     try {
-      setLoading(true);
       setError(null);
       
       const { data: { session } } = await supabase.auth.getSession();
-      if (!session) return;
+      if (!session) {
+        setLoading(false);
+        return;
+      }
       
+      setMetadata(session.user.user_metadata || {});
       const origin = getApiOrigin();
       const headers = { 'Authorization': `Bearer ${session.access_token}` };
       
@@ -67,8 +80,9 @@ export default function Home() {
       setCurriculumData(currData.curriculum || []);
       setRevisionStats(dashData.revisionStats || null);
       setActiveRevisions(dashData.activeRevisions || []);
+      setRecentSubjects(dashData.recentSubjects || []);
+      setSubjectProgress(dashData.subjectProgress || []);
       setStudyStats(dashData.studyStats || { todayStudySeconds: 0, currentStreak: 0 });
-      setMetadata(session.user.user_metadata || {});
     } catch (err: any) {
       setError(err.message || 'Failed to load dashboard');
     } finally {
@@ -93,8 +107,6 @@ export default function Home() {
     );
   }
 
-  const topSubjects = curriculumData?.slice(0, 4) || [];
-  
   const currentExamId = metadata?.target_exam || CURRENT_EXAM_ID;
   const target = EXAM_TARGETS[currentExamId] || EXAM_TARGETS[CURRENT_EXAM_ID];
   const countdown = getExamCountdown(target, currentDate);
@@ -110,33 +122,43 @@ export default function Home() {
     return `${m} min`;
   };
 
-  const dailyTargetHours = 6; // Configurable future goal
+  // Authoritative daily study target hours from user metadata / profile
+  const dailyTargetHours = Number(metadata?.daily_study_target_hours) || 6;
   const dailyTargetSeconds = dailyTargetHours * 3600;
   const todayProgress = Math.min(100, Math.round(((studyStats?.todayStudySeconds || 0) / dailyTargetSeconds) * 100));
 
-  let overallCompletedSubjects = 0;
-  if (curriculumData) {
-    overallCompletedSubjects = curriculumData.filter((s: any) => s.completionPercentage >= 100).length;
-  }
+  // Calculate subjects completed
+  const totalSubjectsCount = curriculumData?.length || 19;
+  const overallCompletedSubjects = (curriculumData || []).filter((s: any) => s.completionPercentage >= 100).length;
+
+  // For Curriculum Progress preview on Home, show first 4 subjects from subjectProgress or curriculumData
+  const previewSubjects = (subjectProgress.length > 0 ? subjectProgress : (curriculumData || [])).slice(0, 4);
 
   return (
     <Screen noPadding>
       <ScrollView contentContainerStyle={{ padding: SPACING.md, paddingBottom: SPACING.xxl }}>
         
+        {/* Top Greeting */}
         <View style={{ marginBottom: SPACING.md, marginTop: SPACING.sm }}>
-          <Text style={{ color: theme.secondaryText, fontSize: 13, fontWeight: '700', textTransform: 'uppercase', letterSpacing: 1 }}>{greeting}, {userName}</Text>
+          <Text style={{ color: theme.secondaryText, fontSize: 13, fontWeight: '700', textTransform: 'uppercase', letterSpacing: 1 }}>
+            {greeting}, {userName}
+          </Text>
         </View>
 
         {/* Exam Target Header */}
         <ExamCountdown target={target} countdown={countdown} />
 
-        {/* Study Focus / Continue Studying */}
+        {/* Study Focus / Today's Focus */}
         <SectionHeader title="Today's Focus" />
         {studyStats?.recentTopicDetails ? (
           <GlassCard style={{ padding: SPACING.md, flexDirection: 'row', alignItems: 'center', backgroundColor: themeType === 'colorful' ? theme.learning : theme.surface }}>
             <View style={{ flex: 1 }}>
-              <Text style={{ color: themeType === 'colorful' ? 'rgba(255,255,255,0.8)' : theme.tertiaryText, fontSize: 13, textTransform: 'uppercase', fontWeight: '600', marginBottom: 2 }}>{studyStats.recentTopicDetails.subjectName}</Text>
-              <Text style={{ color: themeType === 'colorful' ? '#FFF' : theme.primaryText, fontSize: 18, fontWeight: '700' }}>{studyStats.recentTopicDetails.name}</Text>
+              <Text style={{ color: themeType === 'colorful' ? 'rgba(255,255,255,0.8)' : theme.tertiaryText, fontSize: 13, textTransform: 'uppercase', fontWeight: '600', marginBottom: 2 }}>
+                {studyStats.recentTopicDetails.subjectName}
+              </Text>
+              <Text style={{ color: themeType === 'colorful' ? '#FFF' : theme.primaryText, fontSize: 18, fontWeight: '700' }}>
+                {studyStats.recentTopicDetails.name}
+              </Text>
               <Text style={{ color: themeType === 'colorful' ? 'rgba(255,255,255,0.9)' : theme.secondaryText, fontSize: 14, marginTop: 4 }}>
                 Continue studying
               </Text>
@@ -145,17 +167,21 @@ export default function Home() {
               <Text style={{ color: themeType === 'colorful' ? '#FFF' : theme.accent, fontWeight: '600' }}>Continue</Text>
             </TouchableOpacity>
           </GlassCard>
-        ) : topSubjects.length > 0 && topSubjects[0].topics && topSubjects[0].topics.length > 0 ? (
+        ) : previewSubjects.length > 0 ? (
           <GlassCard style={{ padding: SPACING.md, flexDirection: 'row', alignItems: 'center', backgroundColor: themeType === 'colorful' ? theme.learning : theme.surface }}>
             <View style={{ flex: 1 }}>
-              <Text style={{ color: themeType === 'colorful' ? 'rgba(255,255,255,0.8)' : theme.tertiaryText, fontSize: 13, textTransform: 'uppercase', fontWeight: '600', marginBottom: 2 }}>{topSubjects[0].name}</Text>
-              <Text style={{ color: themeType === 'colorful' ? '#FFF' : theme.primaryText, fontSize: 18, fontWeight: '700' }}>{topSubjects[0].topics[0].name}</Text>
+              <Text style={{ color: themeType === 'colorful' ? 'rgba(255,255,255,0.8)' : theme.tertiaryText, fontSize: 13, textTransform: 'uppercase', fontWeight: '600', marginBottom: 2 }}>
+                {previewSubjects[0].name}
+              </Text>
+              <Text style={{ color: themeType === 'colorful' ? '#FFF' : theme.primaryText, fontSize: 18, fontWeight: '700' }}>
+                Start Studying
+              </Text>
               <Text style={{ color: themeType === 'colorful' ? 'rgba(255,255,255,0.9)' : theme.secondaryText, fontSize: 14, marginTop: 4 }}>
-                Start new topic
+                Explore curriculum topics
               </Text>
             </View>
-            <TouchableOpacity onPress={() => router.push(`/topic/${topSubjects[0].topics[0].id}` as any)} style={{ paddingHorizontal: SPACING.md, paddingVertical: SPACING.sm, backgroundColor: themeType === 'colorful' ? 'rgba(255,255,255,0.2)' : theme.surfaceHighlight, borderRadius: RADIUS.full }}>
-              <Text style={{ color: themeType === 'colorful' ? '#FFF' : theme.accent, fontWeight: '600' }}>Start</Text>
+            <TouchableOpacity onPress={() => router.push('/(tabs)/curriculum')} style={{ paddingHorizontal: SPACING.md, paddingVertical: SPACING.sm, backgroundColor: themeType === 'colorful' ? 'rgba(255,255,255,0.2)' : theme.surfaceHighlight, borderRadius: RADIUS.full }}>
+              <Text style={{ color: themeType === 'colorful' ? '#FFF' : theme.accent, fontWeight: '600' }}>Open</Text>
             </TouchableOpacity>
           </GlassCard>
         ) : (
@@ -164,19 +190,26 @@ export default function Home() {
           </GlassCard>
         )}
 
-        {/* Today's Revision */}
-        <SectionHeader title="Today's Revision" />
+        {/* Today's Revision (M17 Topic Spaced Repetition) */}
+        <SectionHeader title="Today's Revision" actionTitle="View all" onAction={() => router.push('/(tabs)/revision')} />
         {activeRevisions && activeRevisions.length > 0 ? (
           <View style={{ gap: SPACING.sm }}>
             {activeRevisions.slice(0, 3).map((rev: any) => (
               <GlassCard key={rev.id} style={{ padding: SPACING.md, flexDirection: 'row', alignItems: 'center' }}>
                 <View style={{ flex: 1 }}>
-                  <Text style={{ color: theme.tertiaryText, fontSize: 11, textTransform: 'uppercase', fontWeight: '600', marginBottom: 2 }}>
-                    {rev.subjectName}
-                  </Text>
+                  <View style={{ flexDirection: 'row', alignItems: 'center', gap: 6, marginBottom: 2 }}>
+                    <Text style={{ color: theme.tertiaryText, fontSize: 11, textTransform: 'uppercase', fontWeight: '600' }}>
+                      {rev.subjectName}
+                    </Text>
+                    {rev.intervalDays && (
+                      <Text style={{ color: theme.accent, fontSize: 11, fontWeight: '600' }}>
+                        • {rev.intervalDays}d cycle
+                      </Text>
+                    )}
+                  </View>
                   <Text style={{ color: theme.primaryText, fontSize: 16, fontWeight: '600' }}>{rev.topicName}</Text>
-                  <Text style={{ color: rev.status === 'OVERDUE' ? '#EF4444' : theme.accent, fontSize: 13, marginTop: 4, fontWeight: '500' }}>
-                    {rev.status === 'OVERDUE' ? 'Overdue' : 'Due today'}
+                  <Text style={{ color: rev.status === 'OVERDUE' ? theme.critical : theme.accent, fontSize: 13, marginTop: 4, fontWeight: '500' }}>
+                    {rev.status === 'OVERDUE' ? '⚠️ Overdue' : 'Due today'}
                   </Text>
                 </View>
                 <TouchableOpacity onPress={() => router.push(`/topic/${rev.topicId}` as any)} style={{ paddingHorizontal: SPACING.md, paddingVertical: SPACING.sm, backgroundColor: theme.surfaceHighlight, borderRadius: RADIUS.full }}>
@@ -211,35 +244,67 @@ export default function Home() {
           </GlassCard>
         </View>
 
-        {/* Subjects Preview */}
+        {/* Recent Subjects (Phase 3) */}
+        <SectionHeader title="Recent Subjects" />
+        {recentSubjects && recentSubjects.length > 0 ? (
+          <View style={{ gap: SPACING.sm }}>
+            {recentSubjects.map((sub: any) => (
+              <GlassCard
+                key={sub.id}
+                style={{ padding: SPACING.md, flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}
+                onPress={() => router.push('/(tabs)/curriculum')}
+              >
+                <View style={{ flex: 1 }}>
+                  <Text style={{ color: theme.primaryText, fontSize: 16, fontWeight: '700' }}>{sub.name}</Text>
+                  <Text style={{ color: theme.secondaryText, fontSize: 13, marginTop: 2 }}>
+                    {sub.relativeTime} {sub.topicName ? `• ${sub.topicName}` : ''}
+                  </Text>
+                </View>
+                <Ionicons name="chevron-forward" size={18} color={theme.tertiaryText} />
+              </GlassCard>
+            ))}
+          </View>
+        ) : (
+          <GlassCard style={{ padding: SPACING.md, alignItems: 'center' }}>
+            <Text style={{ color: theme.secondaryText, textAlign: 'center', fontSize: 14 }}>
+              Start studying to build your recent subjects.
+            </Text>
+            <TouchableOpacity
+              onPress={() => router.push('/(tabs)/curriculum')}
+              style={{ marginTop: SPACING.sm, paddingHorizontal: SPACING.md, paddingVertical: 6, backgroundColor: theme.surfaceHighlight, borderRadius: RADIUS.full }}
+            >
+              <Text style={{ color: theme.accent, fontSize: 13, fontWeight: '600' }}>Browse Curriculum</Text>
+            </TouchableOpacity>
+          </GlassCard>
+        )}
+
+        {/* Curriculum Progress with Dual Metrics (Phase 1 & Phase 2) */}
         <SectionHeader title="Curriculum Progress" actionTitle="View all" onAction={() => router.push('/(tabs)/curriculum')} />
         <Text style={{ color: theme.secondaryText, fontSize: 14, marginBottom: SPACING.sm }}>
-          {overallCompletedSubjects} / {curriculumData?.length || 19} subjects completed
+          {overallCompletedSubjects} / {totalSubjectsCount} subjects completed
         </Text>
-        <View style={{ flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'space-between', marginHorizontal: -SPACING.xs }}>
-          {topSubjects.length > 0 ? topSubjects.map((sub: any) => {
-            let cardColor = theme.surface;
-            if (themeType === 'colorful') {
-              if (sub.completionPercentage > 80) cardColor = theme.success;
-              else if (sub.completionPercentage > 50) cardColor = theme.learning;
-              else if (sub.completionPercentage > 20) cardColor = theme.warning;
-              else cardColor = theme.surfaceElevated;
-            }
-            
-            return (
-            <TouchableOpacity key={sub.id} style={{ width: '50%', padding: SPACING.xs }} onPress={() => router.push('/(tabs)/curriculum')}>
-              <View style={{ backgroundColor: cardColor, padding: SPACING.md, borderRadius: RADIUS.lg, borderWidth: themeType === 'colorful' ? 0 : 1, borderColor: theme.border }}>
-                <Text style={{ color: themeType === 'colorful' && sub.completionPercentage > 20 ? '#FFF' : theme.primaryText, fontSize: 16, fontWeight: '600', marginBottom: SPACING.sm }} numberOfLines={1}>
-                  {sub.name}
-                </Text>
-                <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginBottom: SPACING.xs }}>
-                  <Text style={{ color: themeType === 'colorful' && sub.completionPercentage > 20 ? 'rgba(255,255,255,0.9)' : theme.secondaryText, fontSize: 12 }}>{sub.completionPercentage || 0}%</Text>
-                </View>
-                <ProgressBar progress={sub.completionPercentage || 0} height={4} color={themeType === 'colorful' ? '#FFF' : theme.accent} />
-              </View>
-            </TouchableOpacity>
-          )}) : (
-            <Text style={{ color: theme.secondaryText, paddingHorizontal: SPACING.xs }}>No subjects loaded yet.</Text>
+        
+        <View style={{ gap: SPACING.sm }}>
+          {previewSubjects.length > 0 ? (
+            previewSubjects.map((sub: any) => (
+              <SubjectProgressCard
+                key={sub.id}
+                id={sub.id}
+                name={sub.name}
+                slug={sub.slug}
+                completedTopics={sub.completedTopics ?? sub.completedTopicCount ?? 0}
+                totalTopics={sub.totalTopics ?? sub.topicCount ?? 0}
+                mcqAttempted={sub.mcqAttempted ?? 0}
+                mcqCorrect={sub.mcqCorrect ?? 0}
+                mcqAccuracy={sub.mcqAccuracy ?? null}
+                hasMcqData={sub.hasMcqData ?? false}
+                onPress={() => router.push('/(tabs)/curriculum')}
+              />
+            ))
+          ) : (
+            <GlassCard style={{ padding: SPACING.md }}>
+              <Text style={{ color: theme.secondaryText, textAlign: 'center' }}>No subjects loaded yet.</Text>
+            </GlassCard>
           )}
         </View>
 

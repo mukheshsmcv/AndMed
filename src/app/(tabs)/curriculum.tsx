@@ -291,31 +291,58 @@ export default function Curriculum() {
 
             {curriculumData.map((subject: any) => {
               const isExpanded = expandedId === subject.id;
-              
-              let subStudied = 0;
-              if (subject.topics) {
-                subject.topics.forEach((t: any) => {
-                  if (t.status === 'COMPLETED' || t.masteryScore > 0 || t.questionCount > 0) subStudied++;
-                });
-              }
+              const topicPercentage = subject.topicCount > 0 ? Math.min(100, Math.round(((subject.completedTopicCount || 0) / subject.topicCount) * 100)) : 0;
+              const hasMcq = subject.hasMcqData && subject.mcqAccuracy !== null;
 
               return (
                 <GlassCard key={subject.id} style={{ marginBottom: SPACING.md, padding: 0, overflow: 'hidden' }}>
                   <TouchableOpacity onPress={() => toggleExpand(subject.id)} style={{ padding: SPACING.lg }}>
-                    <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginBottom: SPACING.xs }}>
+                    <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginBottom: SPACING.sm }}>
                       <Text style={{ color: theme.primaryText, fontSize: 18, fontWeight: '700', textTransform: 'uppercase', letterSpacing: 0.5 }}>{subject.name}</Text>
                       <Ionicons name={isExpanded ? 'chevron-up' : 'chevron-down'} size={24} color={theme.tertiaryText} />
                     </View>
                     
-                    <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'flex-end', marginBottom: SPACING.sm }}>
-                      <View>
-                        <Text style={{ color: theme.secondaryText, fontSize: 14 }}>{subject.completedTopicCount || 0} / {subject.topicCount} topics completed</Text>
-                        <Text style={{ color: theme.tertiaryText, fontSize: 13, marginTop: 2 }}>{subject.masteryScore}% mastery overall</Text>
+                    {/* Metric A: Topics Completed */}
+                    <View style={{ marginBottom: SPACING.sm }}>
+                      <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginBottom: 4 }}>
+                        <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                          <Ionicons name="book-outline" size={13} color={theme.learning || '#3B82F6'} style={{ marginRight: 4 }} />
+                          <Text style={{ color: theme.secondaryText, fontSize: 13, fontWeight: '600' }}>Topics</Text>
+                        </View>
+                        <Text style={{ color: theme.primaryText, fontSize: 13, fontWeight: '700' }}>
+                          {subject.completedTopicCount || 0} / {subject.topicCount} <Text style={{ color: theme.tertiaryText, fontWeight: '500' }}>({topicPercentage}%)</Text>
+                        </Text>
                       </View>
-                      <Text style={{ color: theme.primaryText, fontSize: 24, fontWeight: '700' }}>{subject.completionPercentage}%</Text>
+                      <ProgressBar progress={topicPercentage} height={5} color={theme.learning || '#3B82F6'} />
                     </View>
 
-                    <ProgressBar progress={subject.completionPercentage} height={6} color={theme.accent} />
+                    {/* Metric B: MCQ Accuracy */}
+                    <View>
+                      <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginBottom: 4 }}>
+                        <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                          <Ionicons name="stats-chart-outline" size={13} color={theme.accent} style={{ marginRight: 4 }} />
+                          <Text style={{ color: theme.secondaryText, fontSize: 13, fontWeight: '600' }}>MCQ Accuracy</Text>
+                        </View>
+                        {hasMcq ? (
+                          <Text style={{ color: theme.primaryText, fontSize: 13, fontWeight: '700' }}>
+                            {subject.mcqAccuracy}% <Text style={{ color: theme.tertiaryText, fontWeight: '500' }}>({subject.mcqAttempted} tried)</Text>
+                          </Text>
+                        ) : (
+                          <Text style={{ color: theme.tertiaryText, fontSize: 12, fontWeight: '500', fontStyle: 'italic' }}>
+                            — No MCQs attempted
+                          </Text>
+                        )}
+                      </View>
+                      {hasMcq ? (
+                        <ProgressBar
+                          progress={subject.mcqAccuracy}
+                          height={5}
+                          color={subject.mcqAccuracy >= 70 ? theme.success : subject.mcqAccuracy >= 50 ? theme.warning : theme.critical}
+                        />
+                      ) : (
+                        <View style={{ height: 5, backgroundColor: theme.surfaceHighlight, borderRadius: RADIUS.full, opacity: 0.5 }} />
+                      )}
+                    </View>
                   </TouchableOpacity>
 
                   {isExpanded && (

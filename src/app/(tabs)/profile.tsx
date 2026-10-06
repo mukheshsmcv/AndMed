@@ -48,9 +48,14 @@ export default function Profile() {
     const options = Object.values(EXAM_TARGETS);
     const buttons = options.map(opt => ({
       text: opt.displayName,
-      onPress: () => {
-        // In a real app this would write to persistent storage / backend
+      onPress: async () => {
         setExamTargetId(opt.id);
+        const { error } = await supabase.auth.updateUser({
+          data: { target_exam: opt.id }
+        });
+        if (!error) {
+          setMetadata({ ...metadata, target_exam: opt.id });
+        }
         Alert.alert("Target Updated", `Your target exam is now ${opt.displayName}`);
       }
     }));

@@ -48,6 +48,25 @@ export async function GET(req: Request) {
       .select('topic_id, status, updated_at')
       .eq('user_id', user.id);
 
+    // Fetch user question attempts for MCQ accuracy per subject
+    const { data: allUserAttempts } = await supabaseServer
+      .from('question_attempts')
+      .select('is_correct, questions(subject_id)')
+      .eq('user_id', user.id);
+
+    const subjectAttemptsMap = new Map<string, { total: number; correct: number }>();
+    if (allUserAttempts) {
+      allUserAttempts.forEach((att: any) => {
+        const sId = att.questions?.subject_id;
+        if (sId) {
+          const cur = subjectAttemptsMap.get(sId) || { total: 0, correct: 0 };
+          cur.total += 1;
+          if (att.is_correct) cur.correct += 1;
+          subjectAttemptsMap.set(sId, cur);
+        }
+      });
+    }
+
     // Fetch published question counts per topic
     const { data: questionCountsData } = await supabaseServer
       .from('questions')
@@ -111,6 +130,12 @@ export async function GET(req: Request) {
         hasOverdueRevision: topicDetails.some(td => td.revisionStatus === 'Due')
       };
 
+      const mcqStats = subjectAttemptsMap.get(subject.id);
+      const mcqAttempted = mcqStats ? mcqStats.total : 0;
+      const mcqCorrect = mcqStats ? mcqStats.correct : 0;
+      const mcqAccuracy = mcqAttempted > 0 ? Math.round((mcqCorrect / mcqAttempted) * 100) : null;
+      const hasMcqData = mcqAttempted > 0;
+
       return {
         id: subject.id,
         name: subject.name,
@@ -125,6 +150,10 @@ export async function GET(req: Request) {
         completionPercentage: subjectTopics.length > 0 ? Math.round((completedTopics / subjectTopics.length) * 100) : 0,
         masteryScore: sEvidence.masteryScore,
         questionsAttempted: sEvidence.questionsAttempted,
+        mcqAttempted,
+        mcqCorrect,
+        mcqAccuracy,
+        hasMcqData,
         topics: topicDetails
       };
     });
